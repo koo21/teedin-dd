@@ -16,7 +16,7 @@ include '../banner/banner.php';
                 <div class="text-xl font-base text-blue-500 mb-2"> รายละเอียด</div>
 
 
-                <form action="" method="post" onsubmit="chSubmit()">
+                <form action="" method="post">
                     <div class="mb-2">
                         <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชื่อ
                         </label>
@@ -44,7 +44,7 @@ include '../banner/banner.php';
                     <div class="mt-3 mb-5">
 
                         <button type="submit"
-                            class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800">สมัครสมาชิก</button>
+                            class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800 sub">สมัครสมาชิก</button>
                     </div>
                 </form>
                 <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
@@ -66,15 +66,7 @@ include '../banner/banner.php';
         <div class="col-md-3"></div>
     </div>
 
-    <script>
-    function chSubmit() {
-        if (document.getElementById('registerName').value == '') {
-            alert("กรุณากรอกชื่อ");
-            document.getElementById('registerName').focus()
-            return false;
-        }
-    }
-    </script>
+    <script src="../js/checkAlert.js"></script>
 
 
 
