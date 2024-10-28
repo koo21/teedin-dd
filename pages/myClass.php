@@ -10,7 +10,7 @@ class MyClass
         $se = $con->prepare(" SELECT* FROM province ORDER BY name ASC ");
         $se->execute();
         while ($pov = $se->fetch(PDO::FETCH_ASSOC)) {
-            echo '<option value="' . $pov["id"] . '">' . $pov["name"] . '</option>';
+            echo '<option value="' . $pov["pid"] . '">' . $pov["name"] . '</option>';
         }
     }
 }
