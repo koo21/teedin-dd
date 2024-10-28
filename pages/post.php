@@ -37,19 +37,20 @@ include '../banner/banner.php';
 
 <div class="container">
     <div class="row">
-        <div class="col-md-2"></div>
+        <div class="col-md-3"></div>
         <div class="col-md-6 mt-5">
-            <form action="" method="post" enctype="multipart/form-data">
-                <div
-                    class="max-w-4xl p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div
+                class="max-w-4xl p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <form action="" method="post" enctype="multipart/form-data">
 
 
 
-                    <div class="text-4xl font-bold text-success mb-2">ลงประกาศใหม่</div>
-                    <div class="text-xl font-base text-blue-500 mb-5">รายละเอียดที่ดิน (กรุณาลงประกาศเฉพาะ ที่ดิน
+                    <div class="text-2xl font-bold text-success mb-2"><i class="fa-solid fa-bullhorn"></i> ลงประกาศใหม่
+                    </div>
+                    <div class="text-xl font-base text-blue-500 mb-2">รายละเอียดที่ดิน (กรุณาลงประกาศเฉพาะ ที่ดิน
                         เท่านั้น)</div>
-
-                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <hr>
+                    <div class="grid gap-6 mb-6 md:grid-cols-2 mt-2">
 
                         <div class="">
                             <label for="" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">
@@ -241,12 +242,12 @@ include '../banner/banner.php';
                         <button type="submit"
                             class="text-white bg-green-500  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-green-500 dark:focus:ring-blue-800">ลงประกาศ</button>
                     </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4"></div>
+        <div class="col-md-3"></div>
 
-</div>
+    </div>
 </div>
 
 <?php include_once 'modelSearch.php'; ?>

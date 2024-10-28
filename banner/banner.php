@@ -4,26 +4,27 @@
             <div class="logo"><img src="../storage/images/logo.png" alt="Teedin DD" srcset=""></div>
             <div class="menu">
                 <ul class="ulMenu">
-                    <li><a href="index.php" class="menuitem active"><i class="bi bi-house-fill"></i> หน้าแรก</a></li>
-                    <li><a href="" class="menuitem ">ลงประกาศฟรี</a></li>
+                    <li><a href="index.php" class="menuitem "><i class="bi bi-house-fill"></i> หน้าแรก</a></li>
+                    <li><a href="post.php" class="menuitem ">ลงประกาศฟรี</a></li>
                     <li><a href="" class="menuitem ">ลงโฆษณาที่ดิน</a></li>
                     <li><a href="" class="menuitem ">ค้นหา</a></li>
                     <li><a href="" class="menuitem ">ติดต่อเรา</a></li>
-                    <li><a href="" class="menuitem ">สมัครสมาชิก</a></li>
-                    <li><a href="" class="menuitem ">เข้าสู่ระบบ</a></li>
+                    <li><a href="register.php" class="menuitem ">สมัครสมาชิก</a></li>
+                    <li><a href="login.php" class="menuitem ">เข้าสู่ระบบ</a></li>
                 </ul>
             </div>
         </div>
 
     </div>
 </div>
-<script>
-    $(document).ready(function() {
+<!-- <script>
+$(document).ready(function() {
 
-        $('.ulMenu .menuitem').click(function(e) {
-            e.preventDefault();
-            $('.active').removeClass('active');
-            $(this).addClass('active');
-        })
+    $('.ulMenu .menuitem').click(function(e) {
+
+        $('.active').removeClass('active');
+        $(this).addClass('active');
+
     })
-</script>
+})
+</script> -->
