@@ -8,7 +8,15 @@ $(".sub").click(function(){
           });
           return false;   
     }
-
+    if($("#registerLastName").val() == ""){
+    $("#registerLastName").focus();
+        Swal.fire({
+            title: "ลงทะเบียน",
+            text: "กรุณาใส่นามสกุล",
+            icon: "warning"
+          });
+          return false;   
+    }
 
     if($("#registerEmail").val() == ""){
         $("#registerEmail").focus();
@@ -83,3 +91,4 @@ $(".subLogin").click(function(){
    
 
 });
+
