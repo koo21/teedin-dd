@@ -1,8 +1,44 @@
 <?php
-include '../config/connect.php';
+session_start();
+
 include '../components/layoutHead.php';
 include '../banner/banner.php';
+include '../config/connect.php';
+include_once 'myClass.php';
+$obj = new MyClass();
+
 ?>
+
+
+
+<?php
+if (empty($_SESSION["idUser"]) || empty($_SESSION["nameUser"]) || empty($_SESSION["passwordUser"])) {
+    $btnSub  =    '
+<a href="login.php" type="button"
+class="text-white bg-red-500  hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-green-500 dark:focus:ring-red-800">ยังไม่สามารถลงประกาศได้ เนื่องจากยังไม่ Login เข้าสู่ระบบ</a>';
+
+    $showAlert = '<div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+  <span class="font-medium"></span> ยังไม่สามารถลงประกาศได้ เนื่องจากยังไม่ Login เข้าสู่ระบบ
+</div>';
+
+    $showLogin = "";
+} else {
+    $btnSub  = '
+<button type="submit"
+class="text-white bg-green-500  hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800 post">ลงประกาศ</button>';
+    $showAlert = '';
+
+    $showLogin = '<div class="text-end ">สวัสดีคุณ : ' . $_SESSION["nameUser"] . '</div>';
+}
+
+?>
+
+
+
+
+
+
+
 
 <div class="container-fluid bkImg">
     <div class="container">
@@ -43,6 +79,7 @@ include '../banner/banner.php';
                 class="max-w-4xl p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <form action="" method="post" enctype="multipart/form-data">
 
+                    <?= $showLogin; ?>
 
 
                     <div class="text-2xl font-bold text-success mb-2"><i class="fa-solid fa-bullhorn"></i> ลงประกาศใหม่
@@ -53,35 +90,34 @@ include '../banner/banner.php';
                     <div class="grid gap-6 mb-6 md:grid-cols-2 mt-2">
 
                         <div class="">
-                            <label for="" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">
-                                ประเภทประกาศ</label>
+                            <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                * ประเภทประกาศ</label>
 
                             <div class="flex items-center h-5 ">
-                                <input id="remember" type="radio" value=""
-                                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                                    required />
-                                <label for="remember" class="ms-2 text-md  text-gray-900 dark:text-gray-300">ขาย</label>
+                                <input id="sr1" type="radio" value="" name="sr"
+                                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 sr" />
+                                <label for="" class="ms-2 text-md  text-gray-900 dark:text-gray-300">ขาย</label>
                             </div>
 
 
                             <div class="flex items-center h-5">
-                                <input id="remember" type="radio" value=""
-                                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                                    required />
-                                <label for="remember"
-                                    class="ms-2 text-md  text-gray-900 dark:text-gray-300">สำหรับเช่า</label>
+                                <input id="sr2" type="radio" value="" name="sr"
+                                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 sr" />
+                                <label for="" class="ms-2 text-md  text-gray-900 dark:text-gray-300">สำหรับเช่า</label>
                             </div>
                         </div>
 
                         <div>
                             <label for="land_type"
-                                class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">ประเภทที่ดิน</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                                ประเภทที่ดิน</label>
                             <select id="land_type"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 name="land_type">
                                 <option value=""> -- กรุณาเลือก --</option>
 
                                 <?php
+
                                 $laType = $con->prepare("SELECT * FROM land_type");
                                 $laType->execute();
                                 while ($row = $laType->fetch(PDO::FETCH_ASSOC)) {
@@ -98,104 +134,73 @@ include '../banner/banner.php';
                     </div>
 
                     <div class="mb-6">
-                        <label for=""
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">หัวข้อประกาศ</label>
-                        <input type="text" id="" value="" name=""
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            หัวข้อประกาศ</label>
+                        <input type="text" id="ti" value="" name="ti"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                     <div class="mb-6">
-                        <label for="detail"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รายละเอียดของประกาศ</label>
-                        <textarea id="detail" rows="4" name=""
+                        <label for="detail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            รายละเอียดของประกาศ</label>
+                        <textarea id="detail" rows="4" name="detail"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
                     </div>
                     <div class="mb-6">
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ราคา</label>
-                        <input type="text" id="" value="" name=""
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            ราคา <span class="text-red-500 font-normal">ไม่ต้องใส่ลูกน้ำ ( , )</span></label>
+                        <input type="text" id="price" value="" name="price" onchange="JavaScript:chkNum(this)"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
-                    <div class="grid gap-6 mb-6 md:grid-cols-2">
-                        <div>
-                            <label for=""
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">จังหวัด</label>
-                            <select id="" name="pvi"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value=""> -- กรุณาเลือก --</option>
-                                <?php
-                                $pv = $con->prepare("SELECT * FROM province");
-                                $pv->execute();
-                                while ($row = $pv->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '<option value="' . $row['pid'] . '">' . $row['name'] . '</option>';
-                                }
-                                ?>
 
-                            </select>
+                    <div class="mb-3">
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            จังหวัด</label>
+                        <select id="province" name="province"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 province">
+                            <?
 
-                        </div>
-                        <div>
-                            <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เขต /
-                                อำเภอ</label>
-                            <select id=""
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value=""> -- กรุณาเลือก --</option>
-                                <?php
-                                $pv = $con->prepare("SELECT * FROM amphur ");
-                                $pv->execute();
-                                while ($row = $pv->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '<option value="' . $row['pid'] . '">' . $row['name'] . '</option>';
-                                }
-                                ?>
 
-                            </select>
+                            ?>
+                            <option value="0"> -- กรุณาเลือก --</option>
+                            <?= $obj->province(); ?>
 
-                        </div>
-                        <div>
-                            <label for="land_type"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">แขวง / ตำบล</label>
-                            <select id="land_type"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value=""> -- กรุณาเลือก --</option>
-                                <option value="1"></option>
-                                <option value="2">Canada</option>
-                                <option value="3">France</option>
-                                <option value="4">Germany</option>
-                                <option value="5">Germany</option>
-                                <option value="6">Germany</option>
-                                <option value="7">Germany</option>
-                                <option value="8">Germany</option>
-
-                            </select>
-
-                        </div>
-
+                        </select>
 
                     </div>
+
+                    <div class="showAmphur mb-3"></div>
+
+
+
+
+
 
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div class="">
                             <label for=""
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ละติจูด</label>
-                            <input type="text" id="" value=""
+                            <input type="text" id="la" value="" name="la"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         </div>
                         <div class="">
                             <label for=""
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ลองติจูด</label>
-                            <input type="text" id="" value=""
+                            <input type="text" id="lo" value="" name="lo"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         </div>
                     </div>
 
                     <div class="mb-6">
 
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            for="file_input">รูปภาพ</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">*
+                            รูปภาพ</label>
                         <input
-                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 filePic"
                             aria-describedby="file_input_help" id="file_input" type="file" name="file[]"
-                            accept="image/png,image/jpeg" multiple>
+                            accept="image/jpg" multiple>
 
-
+                        <p id="helper-text-explanation" class="mt-2 text-sm text-red-500 dark:text-gray-400">
+                            ใส่รูปไม่เกิน 5 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น</p>
                     </div>
 
                     <div class="p-4 text-md text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
@@ -203,44 +208,30 @@ include '../banner/banner.php';
                         <div class="text-xl font-base text-blue-500 mb-2">รายละเอียดผู้ประกาศ สำหรับติดต่อกลับ</div>
 
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
+
                             <div class="">
-                                <label for=""
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชื่อประกาศ</label>
-                                <input type="text" id="" value=""
+                                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                                    เบอร์โทรศัพท์</label>
+                                <input type="text" id="tel" value="" name="tel"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                             </div>
+
                             <div class="">
-                                <label for=""
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เบอร์โทรศัพท์</label>
-                                <input type="text" id="" value=""
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                            </div>
-                            <div class="">
-                                <label for=""
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">อีเมลล์</label>
-                                <input type="text" id="" value=""
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                            </div>
-                            <div class="">
-                                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">LINE
+                                <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                                    LINE
                                     ID</label>
-                                <input type="text" id="" value=""
+                                <input type="text" id="lineID" value="" name="li"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                             </div>
-                            <div class="">
-                                <label for=""
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">สร้างรหัสผ่าน</label>
-                                <input type="text" id="" value=""
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                            </div>
+
 
                         </div>
                     </div>
 
                     <div class="mt-3">
 
-                        <button type="submit"
-                            class="text-white bg-green-500  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-green-500 dark:focus:ring-blue-800">ลงประกาศ</button>
+                        <?php echo $btnSub; ?>
+
                     </div>
                 </form>
             </div>
@@ -250,7 +241,191 @@ include '../banner/banner.php';
     </div>
 </div>
 
-<?php include_once 'modelSearch.php'; ?>
+<script>
+function addCommas(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+}
+
+function chkNum(ele) {
+    var num = parseFloat(ele.value);
+    ele.value = addCommas(num.toFixed(2));
+}
+
+$(document).ready(function() {
+
+    $('.filePic').change(function() {
+        var numFiles = $(this)[0].files.length;
+        if (numFiles > 5) {
+            Swal.fire({
+                title: "รูปภาพ",
+                text: "กรุณาใส่รูปภาพไม่เกิน 5 รูป",
+                icon: "warning"
+            });
+            $('.filePic').val("");
+        }
+
+
+    });
+
+
+    $(".post").click(function() {
+
+        // if ($(".sr:checked").length == "") {
+        //     $(".sr").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ประเภทประกาศ",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+        // if ($("#land_type").val() == "") {
+        //     $("#land_type").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ประเภทที่ดิน",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#ti").val() == "") {
+        //     $("#ti").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่หัวข้อประกาศ",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#detail").val() == "") {
+        //     $("#detail").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่รายละเอียดประกาศ",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+        // if ($("#price").val() == "") {
+        //     $("#price").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ราคา",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#province").val() == "0") {
+        //     $("#province").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่จังหวัด",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($(".amphur").val() == "0") {
+        //     $(".amphur").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่เขต/อำเภอ",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+
+        // if ($(".district").val() == "0") {
+        //     $(".district").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ตำบล",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#file_input").val() == "") {
+        //     $("#file_input").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "ใส่รูปไม่เกิน 5 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        if ($("#tel").val() == "") {
+            $("#tel").focus();
+            Swal.fire({
+                title: "ลงประกาศ",
+                text: "กรุณาใส่เบอร์โทรศัพท์",
+                icon: "warning"
+            });
+
+            return false;
+        }
+
+        if ($("#lineID").val() == "") {
+            $("#lineID").focus();
+            Swal.fire({
+                title: "ลงประกาศ",
+                text: "กรุณาใส่ LINE ID",
+                icon: "warning"
+            });
+
+            return false;
+        }
+
+
+
+    });
+
+
+    $(".showAmphur").load('searchAmphur.php');
+
+    $('.province').change(function() {
+        let povData = $(this).val();
+        let url = 'searchAmphur.php';
+
+        $.post(url, {
+            povData: povData
+        }, function(data) {
+            $(".showAmphur").html(data);
+        });
+    })
+
+});
+</script>
+
+
+
+<?php include 'modelSearch.php'; ?>
+
+
+
+
 
 
 

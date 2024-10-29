@@ -15,7 +15,7 @@ include '../banner/banner.php';
                     ลงชื่อเข้าใช้</div>
 
 
-                <form action="" method="post">
+                <form action="loginCheck.php" method="post">
 
                     <div class="mb-2">
                         <label for="email"
