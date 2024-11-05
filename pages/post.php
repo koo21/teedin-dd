@@ -18,7 +18,9 @@ if (empty($_SESSION["idUser"]) || empty($_SESSION["nameUser"]) || empty($_SESSIO
 class="text-white bg-red-500  hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-green-500 dark:focus:ring-red-800">ยังไม่สามารถลงประกาศได้ เนื่องจากยังไม่ Login เข้าสู่ระบบ</a>';
 
     $showAlert = '<div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-  <span class="font-medium"></span> ยังไม่สามารถลงประกาศได้ เนื่องจากยังไม่ Login เข้าสู่ระบบ
+  <span class="font-medium"></span> <i class="bi bi-exclamation-triangle"></i>
+</svg>
+ ยังไม่สามารถลงประกาศได้ เนื่องจากยังไม่ Login เข้าสู่ระบบ
 </div>';
 
     $showLogin = "";
@@ -75,9 +77,10 @@ class="text-white bg-green-500  hover:bg-green-800 focus:ring-4 focus:outline-no
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6 mt-5">
+            <?= $showAlert; ?>
             <div
                 class="max-w-4xl p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="insertData.php?g=in" method="post" enctype="multipart/form-data">
 
                     <?= $showLogin; ?>
 
@@ -92,18 +95,21 @@ class="text-white bg-green-500  hover:bg-green-800 focus:ring-4 focus:outline-no
                         <div class="">
                             <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 * ประเภทประกาศ</label>
+                            <div class="flex">
 
-                            <div class="flex items-center h-5 ">
-                                <input id="sr1" type="radio" value="" name="sr"
-                                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 sr" />
-                                <label for="" class="ms-2 text-md  text-gray-900 dark:text-gray-300">ขาย</label>
-                            </div>
+                                <div class="flex items-center h-5 me-5">
+                                    <input id="sr1" type="checkbox" value="1" name="sr"
+                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 sr" />
+                                    <label for="" class="ms-2 text-md  text-gray-900 dark:text-gray-300">ขาย</label>
+                                </div>
 
 
-                            <div class="flex items-center h-5">
-                                <input id="sr2" type="radio" value="" name="sr"
-                                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 sr" />
-                                <label for="" class="ms-2 text-md  text-gray-900 dark:text-gray-300">สำหรับเช่า</label>
+                                <div class="flex items-center h-5">
+                                    <input id="sr2" type="checkbox" value="" name="re"
+                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 sr" />
+                                    <label for=""
+                                        class="ms-2 text-md  text-gray-900 dark:text-gray-300">สำหรับเช่า</label>
+                                </div>
                             </div>
                         </div>
 
@@ -242,181 +248,181 @@ class="text-white bg-green-500  hover:bg-green-800 focus:ring-4 focus:outline-no
 </div>
 
 <script>
-function addCommas(nStr) {
-    nStr += '';
-    x = nStr.split('.');
-    x1 = x[0];
-    x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    function addCommas(nStr) {
+        nStr += '';
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
     }
-    return x1 + x2;
-}
 
-function chkNum(ele) {
-    var num = parseFloat(ele.value);
-    ele.value = addCommas(num.toFixed(2));
-}
+    function chkNum(ele) {
+        var num = parseFloat(ele.value);
+        ele.value = addCommas(num.toFixed(2));
+    }
 
-$(document).ready(function() {
+    $(document).ready(function() {
 
-    $('.filePic').change(function() {
-        var numFiles = $(this)[0].files.length;
-        if (numFiles > 5) {
-            Swal.fire({
-                title: "รูปภาพ",
-                text: "กรุณาใส่รูปภาพไม่เกิน 5 รูป",
-                icon: "warning"
-            });
-            $('.filePic').val("");
-        }
+        $('.filePic').change(function() {
+            var numFiles = $(this)[0].files.length;
+            if (numFiles > 5) {
+                Swal.fire({
+                    title: "รูปภาพ",
+                    text: "กรุณาใส่รูปภาพไม่เกิน 5 รูป",
+                    icon: "warning"
+                });
+                $('.filePic').val("");
+            }
 
 
-    });
-
-
-    $(".post").click(function() {
-
-        // if ($(".sr:checked").length == "") {
-        //     $(".sr").focus();
-        //     Swal.fire({
-        //         title: "ลงประกาศ",
-        //         text: "กรุณาใส่ประเภทประกาศ",
-        //         icon: "warning"
-        //     });
-
-        //     return false;
-        // }
-        // if ($("#land_type").val() == "") {
-        //     $("#land_type").focus();
-        //     Swal.fire({
-        //         title: "ลงประกาศ",
-        //         text: "กรุณาใส่ประเภทที่ดิน",
-        //         icon: "warning"
-        //     });
-
-        //     return false;
-        // }
-
-        // if ($("#ti").val() == "") {
-        //     $("#ti").focus();
-        //     Swal.fire({
-        //         title: "ลงประกาศ",
-        //         text: "กรุณาใส่หัวข้อประกาศ",
-        //         icon: "warning"
-        //     });
-
-        //     return false;
-        // }
-
-        // if ($("#detail").val() == "") {
-        //     $("#detail").focus();
-        //     Swal.fire({
-        //         title: "ลงประกาศ",
-        //         text: "กรุณาใส่รายละเอียดประกาศ",
-        //         icon: "warning"
-        //     });
-
-        //     return false;
-        // }
-        // if ($("#price").val() == "") {
-        //     $("#price").focus();
-        //     Swal.fire({
-        //         title: "ลงประกาศ",
-        //         text: "กรุณาใส่ราคา",
-        //         icon: "warning"
-        //     });
-
-        //     return false;
-        // }
-
-        // if ($("#province").val() == "0") {
-        //     $("#province").focus();
-        //     Swal.fire({
-        //         title: "ลงประกาศ",
-        //         text: "กรุณาใส่จังหวัด",
-        //         icon: "warning"
-        //     });
-
-        //     return false;
-        // }
-
-        // if ($(".amphur").val() == "0") {
-        //     $(".amphur").focus();
-        //     Swal.fire({
-        //         title: "ลงประกาศ",
-        //         text: "กรุณาใส่เขต/อำเภอ",
-        //         icon: "warning"
-        //     });
-
-        //     return false;
-        // }
-
-
-        // if ($(".district").val() == "0") {
-        //     $(".district").focus();
-        //     Swal.fire({
-        //         title: "ลงประกาศ",
-        //         text: "กรุณาใส่ตำบล",
-        //         icon: "warning"
-        //     });
-
-        //     return false;
-        // }
-
-        // if ($("#file_input").val() == "") {
-        //     $("#file_input").focus();
-        //     Swal.fire({
-        //         title: "ลงประกาศ",
-        //         text: "ใส่รูปไม่เกิน 5 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น",
-        //         icon: "warning"
-        //     });
-
-        //     return false;
-        // }
-
-        if ($("#tel").val() == "") {
-            $("#tel").focus();
-            Swal.fire({
-                title: "ลงประกาศ",
-                text: "กรุณาใส่เบอร์โทรศัพท์",
-                icon: "warning"
-            });
-
-            return false;
-        }
-
-        if ($("#lineID").val() == "") {
-            $("#lineID").focus();
-            Swal.fire({
-                title: "ลงประกาศ",
-                text: "กรุณาใส่ LINE ID",
-                icon: "warning"
-            });
-
-            return false;
-        }
-
-
-
-    });
-
-
-    $(".showAmphur").load('searchAmphur.php');
-
-    $('.province').change(function() {
-        let povData = $(this).val();
-        let url = 'searchAmphur.php';
-
-        $.post(url, {
-            povData: povData
-        }, function(data) {
-            $(".showAmphur").html(data);
         });
-    })
 
-});
+
+        $(".post").click(function() {
+
+            // if ($(".sr:checked").length == "") {
+            //     $(".sr").focus();
+            //     Swal.fire({
+            //         title: "ลงประกาศ",
+            //         text: "กรุณาใส่ประเภทประกาศ",
+            //         icon: "warning"
+            //     });
+
+            //     return false;
+            // }
+            // if ($("#land_type").val() == "") {
+            //     $("#land_type").focus();
+            //     Swal.fire({
+            //         title: "ลงประกาศ",
+            //         text: "กรุณาใส่ประเภทที่ดิน",
+            //         icon: "warning"
+            //     });
+
+            //     return false;
+            // }
+
+            // if ($("#ti").val() == "") {
+            //     $("#ti").focus();
+            //     Swal.fire({
+            //         title: "ลงประกาศ",
+            //         text: "กรุณาใส่หัวข้อประกาศ",
+            //         icon: "warning"
+            //     });
+
+            //     return false;
+            // }
+
+            // if ($("#detail").val() == "") {
+            //     $("#detail").focus();
+            //     Swal.fire({
+            //         title: "ลงประกาศ",
+            //         text: "กรุณาใส่รายละเอียดประกาศ",
+            //         icon: "warning"
+            //     });
+
+            //     return false;
+            // }
+            // if ($("#price").val() == "") {
+            //     $("#price").focus();
+            //     Swal.fire({
+            //         title: "ลงประกาศ",
+            //         text: "กรุณาใส่ราคา",
+            //         icon: "warning"
+            //     });
+
+            //     return false;
+            // }
+
+            // if ($("#province").val() == "0") {
+            //     $("#province").focus();
+            //     Swal.fire({
+            //         title: "ลงประกาศ",
+            //         text: "กรุณาใส่จังหวัด",
+            //         icon: "warning"
+            //     });
+
+            //     return false;
+            // }
+
+            // if ($(".amphur").val() == "0") {
+            //     $(".amphur").focus();
+            //     Swal.fire({
+            //         title: "ลงประกาศ",
+            //         text: "กรุณาใส่เขต/อำเภอ",
+            //         icon: "warning"
+            //     });
+
+            //     return false;
+            // }
+
+
+            // if ($(".district").val() == "0") {
+            //     $(".district").focus();
+            //     Swal.fire({
+            //         title: "ลงประกาศ",
+            //         text: "กรุณาใส่ตำบล",
+            //         icon: "warning"
+            //     });
+
+            //     return false;
+            // }
+
+            // if ($("#file_input").val() == "") {
+            //     $("#file_input").focus();
+            //     Swal.fire({
+            //         title: "ลงประกาศ",
+            //         text: "ใส่รูปไม่เกิน 5 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น",
+            //         icon: "warning"
+            //     });
+
+            //     return false;
+            // }
+
+            if ($("#tel").val() == "") {
+                $("#tel").focus();
+                Swal.fire({
+                    title: "ลงประกาศ",
+                    text: "กรุณาใส่เบอร์โทรศัพท์",
+                    icon: "warning"
+                });
+
+                return false;
+            }
+
+            if ($("#lineID").val() == "") {
+                $("#lineID").focus();
+                Swal.fire({
+                    title: "ลงประกาศ",
+                    text: "กรุณาใส่ LINE ID",
+                    icon: "warning"
+                });
+
+                return false;
+            }
+
+
+
+        });
+
+
+        $(".showAmphur").load('searchAmphur.php');
+
+        $('.province').change(function() {
+            let povData = $(this).val();
+            let url = 'searchAmphur.php';
+
+            $.post(url, {
+                povData: povData
+            }, function(data) {
+                $(".showAmphur").html(data);
+            });
+        })
+
+    });
 </script>
 
 
