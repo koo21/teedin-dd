@@ -51,38 +51,7 @@ $(".sub").click(function(){
           return false;   
     }
 
-    if($("#registerTel1").val() == ""){
-        $("#registerTel1").focus();
-        Swal.fire({
-            title: "ลงทะเบียน",
-            text: "กรุณาใส่เบอร์โทรศัพท์",
-            icon: "warning"
-          });
-
-          return false;   
-    }
-
-    if($("#registerTel2").val() == ""){
-        $("#registerTel2").focus();
-        Swal.fire({
-            title: "ลงทะเบียน",
-            text: "กรุณาใส่เบอร์โทรศัพท์ 2",
-            icon: "warning"
-          });
-
-          return false;   
-    }
-
-    if($("#registerLId").val() == ""){
-        $("#registerLId").focus();
-        Swal.fire({
-            title: "ลงทะเบียน",
-            text: "กรุณาใส่ LINEID",
-            icon: "warning"
-          });
-
-          return false;   
-    }
+   
 
     if($("#registerPassword").val() != $("#CRegisterPassword").val()){
         Swal.fire({
