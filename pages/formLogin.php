@@ -24,7 +24,7 @@
         </div>
 
         <div class="text-end">
-            <a href="forgetPassword.php" class="text-gray-700 hover:text-gray-600">
+            <a href="forgotPassword.php" class="text-gray-700 hover:text-gray-600">
                 ลืมรหัสผ่าน
             </a>
         </div>
