@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($se->rowCount() > 0) {
         $r = $se->fetch(PDO::FETCH_ASSOC);
         $_SESSION["idUser"] = $r["uid"];
-        $_SESSION["nameUser"] = $r["fn"] . "" . $r["ln"];
+        $_SESSION["nameUser"] = $r["fn"] . " " . $r["ln"];
         $_SESSION["passwordUser"] = $r["pa"];
         header("Location: post.php");
     } else {

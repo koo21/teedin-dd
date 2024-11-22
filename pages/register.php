@@ -50,41 +50,14 @@ include '../banner/banner.php';
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
 
-                    <!--  update LINEid tel !--->
-                    <div class="grid gap-6 mb-2 md:grid-cols-3">
-
-                        <div class="mb-2">
-                            <label for="number"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เบอร์โทรศัพท์
-                                1</label>
-                            <input type="number" id="registerTel1" name="registerTel1"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                maxlength="10" placeholder="ไม่ต้องใส่ขีด ( - )" />
-                        </div>
-
-                        <div class=" mb-2">
-                            <label for="number"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เบอร์โทรศัพท์
-                                2</label>
-                            <input type="number" id="registerTel2" name="registerTel2"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                maxlength="10" placeholder="ไม่ต้องใส่ขีด ( - )" />
-                        </div>
-
-                        <div class="mb-2">
-                            <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">LINE
-                                ID</label>
-                            <input type="text" id="registerLId" name="registerLId"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                        </div>
-                        <div class="mt-2 mb-5">
-
-                            <button type="submit"
-                                class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800 sub">สมัครสมาชิก</button>
-                        </div>
+                    <div class="mb-2">
+                        <button type="submit"
+                            class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-500 dark:focus:ring-green-800 sub">สมัครสมาชิก</button>
                     </div>
+
+
                 </form>
-                <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+                <div class=" mt-5 p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
                     role="alert">
 
                     <span class="text-md ">* ที่ดินดีดี.คอม คือเว็บไซต์ที่ให้บริการลงประกาศ ขาย,
@@ -95,19 +68,24 @@ include '../banner/banner.php';
                     <span class="text-md ">* สำหรับท่านที่มีปัญหาการสมัครสมาชิก โปรดติดต่อ
                         teedinddonline@gmail.com</span>
                 </div>
-
-
             </div>
 
         </div>
+
+
+
         <div class="col-md-3"></div>
     </div>
 
-    <script src="../js/checkAlert.js"></script>
+</div>
+
+
+
+<script src="../js/checkAlert.js"></script>
 
 
 
 
-    <?php
-    include '../components/layoutFooter.php';
-    ?>
+<?php
+include '../components/layoutFooter.php';
+?>

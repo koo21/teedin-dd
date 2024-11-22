@@ -11,7 +11,7 @@ include '../banner/banner.php';
         <div class="col-md-6 mt-5">
             <div class="max-w-3xl p-6  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800
             dark:border-gray-700">
-                <div class="text-2xl font-medium text-success mb-5"><i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <div class="text-2xl font-medium text-success mb-5"><i class="bi bi-box-arrow-in-right"></i>
                     ลงชื่อเข้าใช้</div>
 
 

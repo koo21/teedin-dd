@@ -1,4 +1,5 @@
 <?php
+include '../fuc/checkName.php';
 include '../components/layoutHead.php';
 include '../banner/banner.php';
 ?>
