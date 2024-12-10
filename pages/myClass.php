@@ -71,4 +71,75 @@ class MyClass
             echo '<option value="' . $povSearch . "/" . $ampSearch . "/" . $dist["did"] . '">' . $dist["name"] . '</option>';
         }
     }
+
+    public function showImg($n)
+    {
+        include '../config/connect.php';
+        $se = $con->prepare(" SELECT * FROM image WHERE pd = ? ");
+        $se->execute([$n]);
+        $row = $se->fetch(PDO::FETCH_ASSOC);
+        return $row["a"];
+    }
+
+    public function showImgAll($n, $p)
+    {
+
+        $link = '../th/img/prop/' . $p;
+
+        include '../config/connect.php';
+        $se = $con->prepare(" SELECT * FROM image WHERE pd = ? ");
+        $se->execute([$n]);
+        $mm = $se->rowCount();
+        while ($r = $se->fetch(PDO::FETCH_ASSOC)) {
+            echo '<img src="' . $link . $r["a"] . '">';
+        }
+    }
+
+    public function name($n)
+    {
+        include '../config/connect.php';
+        $se = $con->prepare(" SELECT * FROM users WHERE uid = ? ");
+        $se->execute([$n]);
+        $r = $se->fetch(PDO::FETCH_ASSOC);
+        return $r["fn"];
+    }
+
+    public function nameImage($n)
+    {
+        include '../config/connect.php';
+        $se = $con->prepare(" SELECT * FROM users WHERE uid = ? ");
+        $se->execute([$n]);
+        $r = $se->fetch(PDO::FETCH_ASSOC);
+        return $r["pb"];
+    }
+
+    public function tel($n)
+    {
+        include '../config/connect.php';
+        $se = $con->prepare(" SELECT * FROM users WHERE uid = ? ");
+        $se->execute([$n]);
+        $r = $se->fetch(PDO::FETCH_ASSOC);
+        return preg_replace('/(.+)([0-9]{4})$/', '$1xxxx', $r["t1"]);
+    }
+
+    public function telFull($n)
+    {
+        include '../config/connect.php';
+        $se = $con->prepare(" SELECT * FROM users WHERE uid = ? ");
+        $se->execute([$n]);
+        $r = $se->fetch(PDO::FETCH_ASSOC);
+        return $r["t1"];
+    }
+
+    public function nameFirstDate($n)
+    {
+        include '../config/connect.php';
+        include '../array/thaiMonth.php';
+        $se = $con->prepare(" SELECT * FROM users WHERE uid = ? ");
+        $se->execute([$n]);
+        $r = $se->fetch(PDO::FETCH_ASSOC);
+        $crExDate = explode("-", $r["cr"]);
+        $crExtime = explode(" ", $crExDate[2]);
+        return $crExtime[0] . ' ' . $months[(int)$crExDate[1]] . " " . ($crExDate[0] + 543);
+    }
 }

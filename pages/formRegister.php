@@ -25,20 +25,34 @@ include '../config/connect.php';
             </div>
         </div>
         <div class="mb-2">
-            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">อีเมลล์</label>
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">อีเมล</label>
             <input type="email" id="registerEmail" name="registerEmail"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
         </div>
         <div class="mb-2">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รหัสผ่าน</label>
-            <input type="password" id="registerPassword" name="registerPassword"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <div class="relative flex items-center mt-2">
+                <input type="password" id="registerPassword" name="registerPassword"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                <button type="button" id="eye"
+                    class="absolute right-2 bg-transparent  flex items-center justify-center text-gray-700">
+                    <i class="bi bi-eye-fill show"></i>
+                    <i class="bi bi-eye-slash-fill hide"></i>
+                </button>
+            </div>
         </div>
         <div class="mb-2">
             <label for="password"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ยืนยันรหัสผ่าน</label>
-            <input type="password" id="CRegisterPassword" name="CRegisterPassword"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <div class="relative flex items-center mt-2">
+                <input type="password" id="CRegisterPassword" name="CRegisterPassword"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                <button type="button" id="CheckEye"
+                    class="absolute right-2 bg-transparent  flex items-center justify-center text-gray-700">
+                    <i class="bi bi-eye-fill show"></i>
+                    <i class="bi bi-eye-slash-fill hide"></i>
+                </button>
+            </div>
         </div>
 
         <div class="mb-2">
@@ -65,3 +79,36 @@ include '../config/connect.php';
 
 
 <script src="../js/checkAlert.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.show').hide()
+        // Show and Hide Password
+        $("#eye").click(function() {
+            if ($("#registerPassword").attr("type") === "password") {
+                $("#registerPassword").attr("type", "text");
+                $('.show').show()
+                $('.hide').hide()
+
+            } else {
+                $("#registerPassword").attr("type", "password");
+                $('.hide').show()
+                $('.show').hide()
+            }
+        });
+        $("#CheckEye").click(function() {
+            if ($("#CRegisterPassword").attr("type") === "password") {
+                $("#CRegisterPassword").attr("type", "text");
+                $('.show').show()
+                $('.hide').hide()
+
+            } else {
+                $("#CRegisterPassword").attr("type", "password");
+                $('.hide').show()
+                $('.show').hide()
+            }
+        });
+
+
+
+    })
+</script>

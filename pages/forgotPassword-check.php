@@ -9,17 +9,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.min.css
 
 
 <?php
-
-
 include '../config/connect.php';
-
-
 $email = $_POST["email"];
 
 $ed = $con->prepare("SELECT * FROM user WHERE em = ? ");
 $ed->execute([$email]);
-$r = $ed->fetch(PDO::FETCH_ASSOC);
-if (!empty($ed)) {
+$n = $ed->rowCount();
+if ($n == 1) {
   echo  '<script>
     $(document).ready(function(){
      Swal.fire({
@@ -35,12 +31,12 @@ if (!empty($ed)) {
   echo '<script>
             $(document).ready(function(){
              Swal.fire({
-                 title: "ลงทะเบียนไม่สำเร็จ",
-                 text: "ลงทะเบียนไม่สำเร็จ เนื่องจากอีเมลล์นี้มีการใช้งานแล้ว กรุณาตรวจสอบ",
+                 title: "ไม่พบอีเมลล์นี้",
+                 text: "ไม่พบอีเมลล์นีี้ เนื่องจากอีเมลล์นี้มีการใช้งานแล้ว กรุณาตรวจสอบใหม่อีกครั้ง",
                  icon: "warning",
                  timer:2500,
                }).then(function() {
-                 window.location.href = "register.php";
+                 window.location.href = "forgotPassword.php";
              });
             });
      </script>';

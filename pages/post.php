@@ -7,11 +7,14 @@ include '../config/connect.php';
 include_once 'myClass.php';
 $obj = new MyClass();
 
+
+$pb = $con->prepare("SELECT * FROM property WHERE uid = ?");
+$pb->execute([$_SESSION["idUser"]]);
+$row = $pb->fetch(PDO::FETCH_ASSOC);
+
 ?>
-
-
-
-
+<link href='https://cdn.jsdelivr.net/npm/froala-editor@4.0.10/css/froala_editor.pkgd.min.css' rel='stylesheet'
+    type='text/css' />
 
 
 
@@ -28,7 +31,7 @@ $obj = new MyClass();
 
 
         <div
-            class="max-w-[220px] mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            class=" mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form action="insertData.php?g=in" method="post" enctype="multipart/form-data">
 
 
@@ -46,16 +49,21 @@ $obj = new MyClass();
                         <div class="flex">
 
                             <div class="flex items-center h-5 me-5">
-                                <input id="sr1" type="checkbox" value="se" name="sr"
+                                <input id="sr1" type="checkbox" value="1" name="se"
                                     class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 sr" />
                                 <label for="" class="ms-2 text-md  text-gray-900 dark:text-gray-300">ขาย</label>
                             </div>
 
 
-                            <div class="flex items-center h-5">
-                                <input id="sr2" type="checkbox" value="re" name="sr"
+                            <div class="flex items-center h-5 me-5">
+                                <input id="sr2" type="checkbox" value="1" name="re"
                                     class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 sr" />
                                 <label for="" class="ms-2 text-md  text-gray-900 dark:text-gray-300">สำหรับเช่า</label>
+                            </div>
+                            <div class="flex items-center h-5">
+                                <input id="sr3" type="checkbox" value="1" name="do"
+                                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 sr" />
+                                <label for="" class="ms-2 text-md  text-gray-900 dark:text-gray-300">ขายดาวน์</label>
                             </div>
                         </div>
                     </div>
@@ -94,8 +102,10 @@ $obj = new MyClass();
                 <div class="mb-6">
                     <label for="detail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
                         รายละเอียดของประกาศ</label>
-                    <textarea id="detail" rows="4" name="detail"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                    <textarea id="example" rows="4" name="detail" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+                        selector">
+
+                    </textarea>
                 </div>
                 <div class="mb-6">
                     <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
@@ -252,7 +262,8 @@ $obj = new MyClass();
 
 
                 <div class="mt-3">
-
+                    <input type="hidden" name="idPd" value="<?php echo $row["pd"] ?>">
+                    <input type="hidden" name="idUser" value="<?php echo $_SESSION["idUser"]  ?>">
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 post">บันทึกข้อมูล</button>
 
@@ -263,7 +274,34 @@ $obj = new MyClass();
 
 </div>
 
+<?php
+include '../components/layoutFooter.php';
+?>
+
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@4.0.10/js/froala_editor.pkgd.min.js'>
+</script>
+
 <script>
+var editor = new FroalaEditor('#example', {
+    //pluginsEnabled: ['align', 'fontSize'],
+    toolbarButtons: ['bold', 'italic', 'textColor', 'backgroundColor', 'fontSize', 'align'],
+    //pluginsEnabled: ['align', 'fontSize', 'textColor', 'backgroundColor'],
+    fontSizeSelection: true,
+    fontSize: ['8', '10', '12', '14', '18', '30', '60', '96'],
+    colorsBackground: [
+        '#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
+        '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
+    ],
+    colorsText: ['#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
+        '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
+    ]
+
+
+});
+
+
+
+
 function addCommas(nStr) {
     nStr += '';
     x = nStr.split('.');
@@ -523,17 +561,3 @@ $(document).ready(function() {
 
 });
 </script>
-
-
-
-<?php include 'modelSearch.php'; ?>
-
-
-
-
-
-
-
-<?php
-include '../components/layoutFooter.php';
-?>

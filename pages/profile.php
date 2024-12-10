@@ -37,8 +37,7 @@ $_SESSION["imgUser"] = $imgUser;
         <?php include 'tabs.php'; ?>
     </div>
 
-    <div
-        class="max-w-[220px] mx-auto p-6  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="mx-auto p-6  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="text-xl font-medium text-blue-800 mb-2">ข้อมูลสมาชิก</div>
 
 

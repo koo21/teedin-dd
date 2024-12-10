@@ -168,16 +168,16 @@ if ($_GET["g"] == "addProfile") {
 if ($_GET["g"] == "in") {
 
 
-    // $sr = $_POST["sr"]; //sr
-    // $re = $_POST["re"]; //re
-    $se = 0;
-    $re = 0;
-    if ($_POST["sr"] == "se") {
-        $se = 1;
-    }
-    if ($_POST["sr"] == "re") {
-        $re = 1;
-    }
+    $ch_row = $con->prepare("SELECT * FROM property ");
+    $ch_row->execute();
+    $total_rows = $ch_row->rowCount() + 1;
+
+
+
+
+    $se = $_POST["se"]; //sr
+    $re = $_POST["re"]; //re
+    $do = $_POST["do"]; //do
 
     $cid = $_POST["land_type"]; //cid2
     $ti = $_POST["ti"]; //ti
@@ -190,13 +190,13 @@ if ($_GET["g"] == "in") {
     $pt = 0;
     $prt = 0;
 
-    if ($_POST["sr"] == "se") {
+    if ($se == 1 or $do == 1) {
         $pt =  $price;
     }
-    if ($_POST["sr"] == "re") {
+    if ($re == 1) {
         $prt = $price;
     }
-    echo $prt;
+    $prt;
     $pid = $_POST["province"]; // pid
     $pv = $con->prepare(" SELECT * FROM province WHERE pid = ? "); //pid
     $pv->execute([$pid]);
@@ -224,16 +224,17 @@ if ($_GET["g"] == "in") {
     $lo = $_POST["lo"]; //lo
     $tel = $_POST["tel"]; //t1
     $li = $_POST["li"]; //li
+    $uid = $_POST["idUser"];
     $newDateTime = date("Y-m-d H:i:s");
 
 
     $imagesCount = count($_FILES["file"]["name"]);
-    for ($i = 0; $i <= $imagesCount; $i++) {
+    for ($i = 0; $i <= ($imagesCount - 1); $i++) {
 
         $images = $_FILES["file"]["tmp_name"][$i];
-        $new_images2 = $i . $_FILES["file"]["name"][$i];
+        $new_images2 = ($i + 1) . $_FILES["file"]["name"][$i];
         //copy($_FILES["fileImg"]["tmp_name"], "../images/product/" . $_FILES["fileImg"]["name"]);
-        $width = 450; //*** Fix Width & Heigh (Autu caculate) ***//
+        $width = 800; //*** Fix Width & Heigh (Autu caculate) ***//
         $size = GetimageSize($images);
         $height = round($width * $size[1] / $size[0]);
         $images_orig = ImageCreateFromJPEG($images);
@@ -246,12 +247,23 @@ if ($_GET["g"] == "in") {
         ImageDestroy($images_fin);
 
         $nameImg .= $new_images2 . "/";
+        $a = $i + 1;
+        try {
+            $imgIn = $con->prepare("INSERT INTO image(pd, a, b, c, o) VALUES(?,?,?,?,?)");
+            $imgIn->execute([$total_rows, $new_images2, $new_images2, $new_images2, $a]);
+        } catch (Exception $e) {
+            echo "error" . $e->getMessage();
+        }
     }
 
     try {
-        $in = $con->prepare("INSERT INTO property(cid2, se, re, pid, pn, aid, an, did, dn, la, lo, doc, ti, d, fl, be, ba, ca, am, pt,prt,cr) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $in->execute([$cid, $se, $re, $pid, $pn, $aid, $an, $did, $dn, $la, $lo, $doc, $ti, $d, $fl, $be, $ba, $ca, $am, $pt, $prt, $newDateTime]);
+        $in = $con->prepare("INSERT INTO property(uid,cid2, se, re, do, pid, pn, aid, an, did, dn, la, lo, doc, ti, d, fl, be, ba, ca, am, pt,prt,cr) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $in->execute([$uid, $cid, $se, $re, $do, $pid, $pn, $aid, $an, $did, $dn, $la, $lo, $doc, $ti, $d, $fl, $be, $ba, $ca, $am, $pt, $prt, $newDateTime]);
         if (!empty($in)) {
+
+
+
+
             echo '<script>
             $(document).ready(function(){
              Swal.fire({
