@@ -11,19 +11,22 @@ $obj = new MyClass();
 <div class="container-fit w-auto mx-auto">
     <img src="../storage/images/bannerHome-1.jpg" alt="" srcset="">
 </div>
-<div class="container flex flex-col-2 gap-4 items-top justify-center mx-auto my-2">
-    <div class="flex justify-center mt-2 font-medium"><i class="bi bi-search"></i> ค้นหา </div>
-    <div class="">
-        <select id="countries"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 province">
-            <option selected>-- จังหวัด --</option>
-            <?= $obj->province(); ?>
-        </select>
-    </div>
+<form action="searchData.php" method="post">
+    <div class="container flex gap-3 md:grid md:grid-col-2 ">
+        <div class="flex justify-center mt-2 font-medium lg:justify-end"><i class="bi bi-search"></i> ค้นหา </div>
+        <div class="">
+            <select id="countries"
+                class="h-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 province">
+                <option selected>-- จังหวัด --</option>
+                <?= $obj->province(); ?>
+            </select>
+        </div>
 
-    <div class="showAmphur"></div>
+        <div class="showAmphur"></div>
 
 
+
+</form>
 </div>
 
 <div class="container mt-5 mb-5">
