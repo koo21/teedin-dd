@@ -294,4 +294,130 @@ if ($_GET["g"] == "in") {
         echo "Error: " . $e->getMessage();
     }
 }
+
+
+
+if ($_GET["g"] == "ed") {
+
+
+    $se = $_POST["se"]; //sr
+    $re = $_POST["re"]; //re
+    $do = $_POST["do"]; //do
+
+
+    $cid = $_POST["land_type"]; //cid2
+    $ti = $_POST["ti"]; //ti
+    $d = $_POST["detail"]; //de
+    $price = $_POST["price"];
+    $bad_symbols = array(",", ".");
+    $price = str_replace($bad_symbols, "", $price); //pt
+    $am = $_POST["am"]; //am
+    $am = str_replace($bad_symbols, "", $am); //am
+    $pt = 0;
+    $prt = 0;
+
+    if ($se == 1 or $do == 1) {
+        $pt =  $price;
+    }
+    if ($re == 1) {
+        $prt = $price;
+    }
+
+    $pid = $_POST["province"]; // pid
+    $pv = $con->prepare(" SELECT * FROM province WHERE pid = ? "); //pid
+    $pv->execute([$pid]);
+    $rPv = $pv->fetch(PDO::FETCH_ASSOC);
+    $pn = $rPv["name"]; //pn
+    $amphurEx = explode("/", $_POST["amphur"]);
+    $aid = $amphurEx[1]; //aid
+    $ap = $con->prepare(" SELECT * FROM amphur WHERE aid = ? ");
+    $ap->execute([$aid]);
+    $rap = $ap->fetch(PDO::FETCH_ASSOC);
+    $an = $rap["name"]; //an
+    $districtEx = explode("/", $_POST["district"]);
+    $did = $districtEx[2]; //did
+    $di = $con->prepare(" SELECT * FROM district WHERE did = ? ");
+    $di->execute([$did]);
+    $rdi = $di->fetch(PDO::FETCH_ASSOC);
+    $dn = $rdi["name"]; //dn
+
+    $doc  = $_POST["doc"]; //doc
+    $fl = $_POST["fl"]; //tl
+    $be = $_POST["be"]; //be
+    $ba = $_POST["ba"];
+    $ca = $_POST["ca"];
+    $la = $_POST["la"]; //la
+    $lo = $_POST["lo"]; //lo
+    $tel = $_POST["tel"]; //t1
+    $li = $_POST["li"]; //li
+    $uid = $_POST["idUser"];
+    $pd = $_POST["idPd"];
+    $editDateTime = date("Y-m-d H:i:s");
+
+
+    echo $imagesCount = count($_FILES["file"]["name"]);
+    for ($i = 0; $i <= ($imagesCount - 1); $i++) {
+
+        $images = $_FILES["file"]["tmp_name"][$i];
+        $new_images2 = ($i + 1) . $_FILES["file"]["name"][$i];
+        //copy($_FILES["fileImg"]["tmp_name"], "../images/product/" . $_FILES["fileImg"]["name"]);
+        $width = 800; //*** Fix Width & Heigh (Autu caculate) ***//
+        $size = GetimageSize($images);
+        $height = round($width * $size[1] / $size[0]);
+        $images_orig = ImageCreateFromJPEG($images);
+        $photoX = ImagesX($images_orig);
+        $photoY = ImagesY($images_orig);
+        $images_fin = ImageCreateTrueColor($width, $height);
+        ImageCopyResampled($images_fin, $images_orig, 0, 0, 0, 0, $width + 1, $height + 1, $photoX, $photoY);
+        ImageJPEG($images_fin, "../th/img/prop/" . date("Y") . "/" . date("m") . "/" . $new_images2);
+        ImageDestroy($images_orig);
+        ImageDestroy($images_fin);
+
+        $nameImg .= $new_images2 . "/";
+        $a = $i + 1;
+        try {
+            $imgIn = $con->prepare("UPDATE image SET a = ?, b = ?, c= ?, o = ? WHERE pd = ? ");
+            $imgIn->execute([$new_images2, $new_images2, $new_images2, $a, $pd]);
+        } catch (Exception $e) {
+            echo "error" . $e->getMessage();
+        }
+    }
+
+
+    try {
+
+
+        $ed = $con->prepare("UPDATE property SET cid2 = ?, se = ?,re = ?,do = ?,pid = ?,pn = ?,aid = ?,an = ?,did = ?,dn = ?,la = ?,lo = ?, doc = ?,ti = ?,d = ?,fl = ?,be = ?,ba  = ?,ca = ?,am = ?,pt = ?,prt = ?,mo = ? WHERE pd = ?");
+        $ed->execute([$cid, $se, $re, $do, $pid, $pn, $aid, $an, $did, $dn, $la, $lo, $doc, $ti, $d, $fl, $be, $ba, $ca, $am, $pt, $prt, $editDateTime, $pd]);
+        if (!empty($ed)) {
+            echo '<script>
+                $(document).ready(function(){
+                 Swal.fire({
+                     title: "แก้ไขประกาศสำเร็จ",
+                     text: "แก้ไขประกาศสำเร็จเรียบร้อยแล้ว!",
+                     icon: "success",
+                     timer:1500,
+                   }).then(function() {
+                     window.location.href = "listDetailPost.php";
+                 });
+                });
+         </script>';;
+        } else {
+            echo '<script>
+                $(document).ready(function(){
+                 Swal.fire({
+                     title: "แก้ไขลงประกาศไม่สำเร็จ",
+                     text: "แก้ไขประกาศไม่สำเร็จ เนื่องจากอีเมลล์นี้มีการใช้งานแล้ว กรุณาตรวจสอบ",
+                     icon: "warning",
+                     timer:2500,
+                   }).then(function() {
+                     window.location.href = "edit.php";
+                 });
+                });
+         </script>';
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
 ?>

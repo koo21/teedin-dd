@@ -63,51 +63,55 @@ $obj = new MyClass();
                     while ($r = $list->fetch(PDO::FETCH_ASSOC)) {
                         if ($r["se"] == "1" and $r["re"] == "0" and $r["do"] == "0") {
                             $status = "ขาย";
+                            $price = $r["pt"];
                         } elseif ($r["se"] == "0" and $r["re"] == "1" and $r["do"] == "0") {
                             $status = "ให้เช่า";
+                            $price = $r["prt"];
                         } elseif ($r["se"] == "1" and $r["re"] == "1" and $r["do"] == "0") {
                             $status = "ขายหรือให้เช่า";
                         } elseif ($r["se"] == "0" and $r["re"] == "0" and $r["do"] == "1") {
                             $status = "ขายดาวน์";
                         } elseif ($r["se"] == "1" and $r["re"] == "0" and $r["do"] == "1") {
                             $status = "ขายหรือขายดาวน์";
+                            $price = $r["pt"];
                         } elseif ($r["se"] == "0" and $r["re"] == "1" and $r["do"] == "1") {
                             $status = "ให้เช่าหรือขายดาวน์";
+                            $price = $r["prt"];
                         } elseif ($r["se"] == "1" and $r["re"] == "1" and $r["do"] == "1") {
                             $status = "ขายหรือให้เช่าหรือขายดาวน์";
                         }
 
 
                     ?>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
-                            <?= $n ?>
-                        </th>
-                        <td class="px-6 py-4 ">
-                            <?= $r["ti"] ?>
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            <?= $status ?>
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            <?= number_format($r["pt"], 2) ?>
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            <?= $r["pn"] ?>
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            <?= $r["cr"] ?>
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            <a href="#"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">แก้ไขประกาศ</a>
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            <a href="#"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">แจ้งยกเลิก</a></a>
-                        </td>
-                    </tr>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
+                                <?= $n ?>
+                            </th>
+                            <td class="px-6 py-4 ">
+                                <?= $r["ti"] ?>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <?= $status ?>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <?= $price  ?>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <?= $r["pn"] ?>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <?= $r["cr"] ?>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <a href="edit.php?pd=<?= $r["pd"] ?>"
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">แก้ไขประกาศ</a>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <a href="#"
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">แจ้งยกเลิก</a></a>
+                            </td>
+                        </tr>
                     <?php
                         $n++;
                     }

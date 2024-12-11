@@ -131,6 +131,15 @@ class MyClass
         return $r["t1"];
     }
 
+    public function lineID($n)
+    {
+        include '../config/connect.php';
+        $se = $con->prepare(" SELECT * FROM users WHERE uid = ? ");
+        $se->execute([$n]);
+        $r = $se->fetch(PDO::FETCH_ASSOC);
+        return $r["li"];
+    }
+
     public function nameFirstDate($n)
     {
         include '../config/connect.php';
@@ -141,5 +150,14 @@ class MyClass
         $crExDate = explode("-", $r["cr"]);
         $crExtime = explode(" ", $crExDate[2]);
         return $crExtime[0] . ' ' . $months[(int)$crExDate[1]] . " " . ($crExDate[0] + 543);
+    }
+
+    public function land_typeName($n)
+    {
+        include '../config/connect.php';
+        $se = $con->prepare(" SELECT * FROM land_type WHERE id =? ");
+        $se->execute([$n]);
+        $r = $se->fetch(PDO::FETCH_ASSOC);
+        return $r["name"];
     }
 }
