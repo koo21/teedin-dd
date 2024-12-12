@@ -3,7 +3,7 @@ include 'myClass.php';
 $obj = new MyClass();
 $povData = $_POST["povData"];
 ?>
-<div class="flex gap-3 md:grid grid-cols-3 ">
+<div class="grid gap-x-8 gap-y-4  md:grid md:grid-flow-col md:auto-cols-max  md:gap-4">
     <select id="countries" name="amphur"
         class=" h-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 amphur">
         <option value="0">-- เลือกเขต/อำเภอ --</option>
@@ -11,28 +11,28 @@ $povData = $_POST["povData"];
     </select>
 
 
-    <div class=" searchDistrict"></div>
-
+    <div class="searchDistrict "></div>
 </div>
 
 
+
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
 
-    $(".searchDistrict").load('searchDistrictIndex.php');
+        $(".searchDistrict").load('searchDistrictIndex.php');
 
-    $('.amphur').change(function() {
-        let distrData = $(this).val();
-        let url = 'searchDistrictIndex.php';
+        $('.amphur').change(function() {
+            let distrData = $(this).val();
+            let url = 'searchDistrictIndex.php';
 
 
 
-        $.post(url, {
-            distrData: distrData
-        }, function(data) {
-            $(".searchDistrict").html(data);
-        });
-    })
+            $.post(url, {
+                distrData: distrData
+            }, function(data) {
+                $(".searchDistrict").html(data);
+            });
+        })
 
-});
+    });
 </script>

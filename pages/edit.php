@@ -23,8 +23,8 @@ $crEx = explode("-", $row["cr"]);
 $part = $crEx[0] . "/" . $crEx[1] . "/";
 $uid = $row["uid"];
 $se = $row["se"];
-echo $re = $row["re"];
-echo $do = $row["do"];
+$re = $row["re"];
+$do = $row["do"];
 $pt = $row["pt"];
 $prt = $row["prt"];
 if ($se == "1" and $re == "0" and $do == "0") {
@@ -106,13 +106,6 @@ $id = $row["pd"];
                             * ประเภทประกาศ</label>
                         <div class="flex">
 
-                            <?php
-                            if ($row["se"] == 1) {
-                                $seCheck = 'checked';
-                            } else {
-                                $seCheck = '';
-                            }
-                            ?>
                             <div class="flex items-center h-5 me-5">
 
                                 <input id="sr1" type="checkbox" value="1" name="se"
@@ -309,8 +302,21 @@ $id = $row["pd"];
                 </div>
 
                 <div class="mb-6">
+                    <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                        role="alert">
+                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span class="sr-only">Info</span>
+                        <div>
+                            <span class="font-medium">Danger alert!</span> Change a few things up and try submitting
+                            again.
+                        </div>
+                    </div>
                     <div class="text-end">
-                        <button type="button"
+                        <button type="button" id="deleteImage"
                             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-1.5 me-1 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">ลบรูปภาพเก่า</button>
 
                     </div>
@@ -321,10 +327,10 @@ $id = $row["pd"];
                         while ($rowImage = $mte->fetch(PDO::FETCH_ASSOC)) {
                         ?>
 
-                            <div class="">
-                                <img src="../th/img/prop/<?= $part . $rowImage["a"] ?>" alt="" srcset=""
-                                    class="h-[50px] w-full mx-auto object-cover rounded-xl md:h-[100px] lg:h-[150px] lg:w-full lg:object-cover ">
-                            </div>
+                        <div class="">
+                            <img src="../th/img/prop/<?= $part . $rowImage["a"] ?>" alt="" srcset=""
+                                class="h-[50px] w-full mx-auto object-cover rounded-xl md:h-[100px] lg:h-[150px] lg:w-full lg:object-cover ">
+                        </div>
                         <?php
                         }
                         ?>
@@ -389,299 +395,317 @@ include '../components/layoutFooter.php';
 <script type="text/javascript" src="../slick/slick/slick.min.js"></script>
 
 <script>
-    var editor = new FroalaEditor('#example', {
-        //pluginsEnabled: ['align', 'fontSize'],
-        toolbarButtons: ['bold', 'italic', 'textColor', 'backgroundColor', 'fontSize', 'align'],
-        //pluginsEnabled: ['align', 'fontSize', 'textColor', 'backgroundColor'],
-        fontSizeSelection: true,
-        fontSize: ['8', '10', '12', '14', '18', '30', '60', '96'],
-        colorsBackground: [
-            '#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
-            '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
-        ],
-        colorsText: ['#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
-            '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
-        ]
+var editor = new FroalaEditor('#example', {
+    //pluginsEnabled: ['align', 'fontSize'],
+    toolbarButtons: ['bold', 'italic', 'textColor', 'backgroundColor', 'fontSize', 'align'],
+    //pluginsEnabled: ['align', 'fontSize', 'textColor', 'backgroundColor'],
+    fontSizeSelection: true,
+    fontSize: ['8', '10', '12', '14', '18', '30', '60', '96'],
+    colorsBackground: [
+        '#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
+        '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
+    ],
+    colorsText: ['#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
+        '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
+    ]
 
 
-    });
+});
 
 
 
 
-    function addCommas(nStr) {
-        nStr += '';
-        x = nStr.split('.');
-        x1 = x[0];
-        x2 = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(x1)) {
-            x1 = x1.replace(rgx, '$1' + ',' + '$2');
-        }
-        return x1 + x2;
+function addCommas(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
+    return x1 + x2;
+}
 
-    function chkNum(ele) {
-        var num = parseFloat(ele.value);
-        ele.value = addCommas(num);
+function chkNum(ele) {
+    var num = parseFloat(ele.value);
+    ele.value = addCommas(num);
+}
+
+function addCommas1(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
+    return x1 + x2;
+}
 
-    function addCommas1(nStr) {
-        nStr += '';
-        x = nStr.split('.');
-        x1 = x[0];
-        x2 = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(x1)) {
-            x1 = x1.replace(rgx, '$1' + ',' + '$2');
-        }
-        return x1 + x2;
-    }
+function chkNum1(ele) {
+    var num = parseFloat(ele.value);
+    ele.value = addCommas1(num);
+}
 
-    function chkNum1(ele) {
-        var num = parseFloat(ele.value);
-        ele.value = addCommas1(num);
-    }
+$(document).ready(function() {
 
-    $(document).ready(function() {
-
-
-
-
-        // load more content
-
-
-        $('.filePic').change(function() {
-            var numFiles = $(this)[0].files.length;
-            if (numFiles > 5) {
-                Swal.fire({
-                    title: "รูปภาพ",
-                    text: "กรุณาใส่รูปภาพไม่เกิน 5 รูป",
-                    icon: "warning"
-                });
-                $('.filePic').val("");
+    $('#deleteImage').click(function() {
+        Swal.fire({
+            title: "ลบรูปภาพ ?",
+            text: "คุณต้องการลบรูปภาพไหม ?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ใช่",
+            cancelButtonText: "ยกเลิก"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "insertData.php?g=dImg&pd=<?php echo $id ?>";
             }
 
-
-        });
-
-
-        $(".post").click(function() {
-
-            // if ($(".sr:checked").length == "") {
-            //     $(".sr").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่ประเภทประกาศ",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-            // if ($("#land_type").val() == "") {
-            //     $("#land_type").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่ประเภทที่ดิน",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($("#ti").val() == "") {
-            //     $("#ti").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่หัวข้อประกาศ",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($("#detail").val() == "") {
-            //     $("#detail").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่รายละเอียดประกาศ",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-
-            // if ($("#am").val() == "") {
-            //     $("#am").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่ขนาดที่ดิน",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($("#doc").val() == "") {
-            //     $("#doc").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่โฉนดที่ดิน",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($("#fl").val() == "") {
-            //     $("#fl").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่ชั้น",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($("#be").val() == "") {
-            //     $("#be").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่ห้องนอน",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-            // if ($("#ba").val() == "") {
-            //     $("#ba").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่ห้องน้ำ",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-            // if ($("#ca").val() == "") {
-            //     $("#ca").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่โรงรถ",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($("#price").val() == "") {
-            //     $("#price").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่ราคา",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($("#province").val() == "0") {
-            //     $("#province").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่จังหวัด",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($(".amphur").val() == "0") {
-            //     $(".amphur").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่เขต/อำเภอ",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-
-            // if ($(".district").val() == "0") {
-            //     $(".district").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่ตำบล",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($("#file_input").val() == "") {
-            //     $("#file_input").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "ใส่รูปไม่เกิน 5 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($("#tel").val() == "") {
-            //     $("#tel").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่เบอร์โทรศัพท์",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
-
-            // if ($("#lineID").val() == "") {
-            //     $("#lineID").focus();
-            //     Swal.fire({
-            //         title: "ลงประกาศ",
-            //         text: "กรุณาใส่ LINE ID",
-            //         icon: "warning"
-            //     });
-
-            //     return false;
-            // }
+        });;
+    })
 
 
 
-        });
+    // load more content
 
 
-        $(".showAmphur").load('searchAmphur.php');
+    $('.filePic').change(function() {
+        var numFiles = $(this)[0].files.length;
+        if (numFiles > 5) {
+            Swal.fire({
+                title: "รูปภาพ",
+                text: "กรุณาใส่รูปภาพไม่เกิน 5 รูป",
+                icon: "warning"
 
-        $('.province').mouseover(function() {
-            let povData = $(this).val();
-            let url = 'searchAmphur.php';
-
-            $.post(url, {
-                povData: povData
-            }, function(data) {
-                $(".showAmphur").html(data);
             });
-        })
+            $('.filePic').val("");
+        }
 
-        $('.province').change(function() {
-            let povData = $(this).val();
-            let url = 'searchAmphur.php';
-
-            $.post(url, {
-                povData: povData
-            }, function(data) {
-                $(".showAmphur").html(data);
-            });
-        })
 
     });
+
+
+    $(".post").click(function() {
+
+        // if ($(".sr:checked").length == "") {
+        //     $(".sr").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ประเภทประกาศ",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+        // if ($("#land_type").val() == "") {
+        //     $("#land_type").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ประเภทที่ดิน",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#ti").val() == "") {
+        //     $("#ti").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่หัวข้อประกาศ",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#detail").val() == "") {
+        //     $("#detail").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่รายละเอียดประกาศ",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+
+        // if ($("#am").val() == "") {
+        //     $("#am").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ขนาดที่ดิน",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#doc").val() == "") {
+        //     $("#doc").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่โฉนดที่ดิน",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#fl").val() == "") {
+        //     $("#fl").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ชั้น",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#be").val() == "") {
+        //     $("#be").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ห้องนอน",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+        // if ($("#ba").val() == "") {
+        //     $("#ba").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ห้องน้ำ",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+        // if ($("#ca").val() == "") {
+        //     $("#ca").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่โรงรถ",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#price").val() == "") {
+        //     $("#price").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ราคา",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#province").val() == "0") {
+        //     $("#province").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่จังหวัด",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($(".amphur").val() == "0") {
+        //     $(".amphur").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่เขต/อำเภอ",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+
+        // if ($(".district").val() == "0") {
+        //     $(".district").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ตำบล",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#file_input").val() == "") {
+        //     $("#file_input").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "ใส่รูปไม่เกิน 5 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#tel").val() == "") {
+        //     $("#tel").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่เบอร์โทรศัพท์",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+        // if ($("#lineID").val() == "") {
+        //     $("#lineID").focus();
+        //     Swal.fire({
+        //         title: "ลงประกาศ",
+        //         text: "กรุณาใส่ LINE ID",
+        //         icon: "warning"
+        //     });
+
+        //     return false;
+        // }
+
+
+
+    });
+
+
+    $(".showAmphur").load('searchAmphur.php');
+
+    $('.province').mouseover(function() {
+        let povData = $(this).val();
+        let url = 'searchAmphur.php';
+
+        $.post(url, {
+            povData: povData
+        }, function(data) {
+            $(".showAmphur").html(data);
+        });
+    })
+
+    $('.province').change(function() {
+        let povData = $(this).val();
+        let url = 'searchAmphur.php';
+
+        $.post(url, {
+            povData: povData
+        }, function(data) {
+            $(".showAmphur").html(data);
+        });
+    })
+
+});
 </script>

@@ -17,6 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: post.php");
     } else {
         $_SESSION["alert"] = "Invalid email or password.";
-        header("Location: login.php");
+        header("Location: index.php");
     }
 }

@@ -300,6 +300,11 @@ if ($_GET["g"] == "in") {
 if ($_GET["g"] == "ed") {
 
 
+    $ch_row = $con->prepare("SELECT * FROM property ");
+    $ch_row->execute();
+    $total_rows = $ch_row->rowCount();
+
+
     $se = $_POST["se"]; //sr
     $re = $_POST["re"]; //re
     $do = $_POST["do"]; //do
@@ -355,7 +360,7 @@ if ($_GET["g"] == "ed") {
     $editDateTime = date("Y-m-d H:i:s");
 
 
-    echo $imagesCount = count($_FILES["file"]["name"]);
+    $imagesCount = count($_FILES["file"]["name"]);
     for ($i = 0; $i <= ($imagesCount - 1); $i++) {
 
         $images = $_FILES["file"]["tmp_name"][$i];
@@ -376,8 +381,8 @@ if ($_GET["g"] == "ed") {
         $nameImg .= $new_images2 . "/";
         $a = $i + 1;
         try {
-            $imgIn = $con->prepare("UPDATE image SET a = ?, b = ?, c= ?, o = ? WHERE pd = ? ");
-            $imgIn->execute([$new_images2, $new_images2, $new_images2, $a, $pd]);
+            $imgIn = $con->prepare("INSERT INTO image(pd, a, b, c, o) VALUES(?,?,?,?,?)");
+            $imgIn->execute([$total_rows, $new_images2, $new_images2, $new_images2, $a]);
         } catch (Exception $e) {
             echo "error" . $e->getMessage();
         }
@@ -420,4 +425,37 @@ if ($_GET["g"] == "ed") {
         echo "Error: " . $e->getMessage();
     }
 }
+
+
+if ($_GET["g"] == "dImg") {
+
+    $de = $con->prepare("DELETE FROM image WHERE pd = ?");
+    $de->execute([$_GET["pd"]]);
+    if (!empty($de)) {
+        echo '<script>
+            $(document).ready(function(){
+             Swal.fire({
+                 title: "ลบรูปภาพสำเร็จ",
+                 text: "ลบรูปภาพสำเร็จเรียบร้อยแล้ว! กรุณาใส่่รูปภาพใหม่อีกครั้ง",
+                 icon: "success",
+               }).then(function() {
+                 window.location.href = "edit.php";
+             });
+            });
+     </script>';;
+    } else {
+        echo '<script>
+            $(document).ready(function(){
+             Swal.fire({
+                 title: "ลบรูปภาพไม่สำเร็จ",
+                 text: "ลบรูปภาพไม่สำเร็จ เนื่องจากอีเมลล์นี้มีการใช้งานแล้ว กรุณาตรวจสอบ",
+                 icon: "warning",
+               }).then(function() {
+                 window.location.href = "edit.php";
+             });
+            });
+     </script>';
+    }
+}
+
 ?>
