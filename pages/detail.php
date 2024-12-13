@@ -28,11 +28,11 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
     <title>Teedin DD</title>
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://madu-web.com" />
-    <meta property="og:title" content="<?= $rowSe["ti"] ?>">
-    <meta property="og:description" content="<?= $rowSe["d"] ?>">
+    <meta property="og:title" content="<?php echo $rowSe["ti"]; ?>">
+    <meta property="og:description" content="<?php echo $rowSe["d"]; ?>">
     <meta name="keywords" content="">
-    <!-- <meta name="description" content=""> -->
-    <meta property="og:image" content="<?= $img2 ?>" />
+    <meta name="description" content="">
+    <meta property="og:image" content="<?php echo $img2 ?>" />
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
@@ -399,8 +399,11 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
                                 <div class="mb-2">
 
 
-                                    <div class=" text-green-700 font-sm font-normal ">
-                                        <?= $status ?>
+                                    <div class="mb-2">
+                                        <span
+                                            class="bg-green-100 text-green-800 text-sm font-light me-2 px-1.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                                            <?= $status ?></span>
+
                                     </div>
 
                                     <h5
