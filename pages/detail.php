@@ -1,5 +1,5 @@
 <?php
-include '../fuc/checkName.php';
+//include '../fuc/checkName.php';
 //include '../components/layoutHead.php';
 include '../banner/banner.php';
 include '../config/connect.php';
@@ -31,7 +31,7 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
     <meta property="og:title" content="<?= $rowSe["ti"] ?>">
     <meta property="og:description" content="<?= $rowSe["d"] ?>">
     <meta name="keywords" content="">
-    <!-- <meta name="description" content="<?= $rowSe["d"] ?>"> -->
+    <!-- <meta name="description" content=""> -->
     <meta property="og:image" content="<?= $img2 ?>" />
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js"></script>
@@ -167,15 +167,19 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
         $price = number_format($rowSe["prt"]);
     } elseif ($rowSe["se"] == "1" and $rowSe["re"] == "1" and $rowSe["do"] == "0") {
         $status = "ขายหรือให้เช่า";
+        $price = number_format($rowSe["pt"]);
     } elseif ($rowSe["se"] == "0" and $rowSe["re"] == "0" and $rowSe["do"] == "1") {
         $status = "ขายดาวน์";
+        $price = number_format($rowSe["pt"]);
     } elseif ($rowSe["se"] == "1" and $rowSe["re"] == "0" and $rowSe["do"] == "1") {
         $status = "ขายหรือขายดาวน์";
+        $price = number_format($rowSe["pt"]);
     } elseif ($rowSe["se"] == "0" and $rowSe["re"] == "1" and $rowSe["do"] == "1") {
         $status = "ให้เช่าหรือขายดาวน์";
         $price = number_format($rowSe["prt"]);
     } elseif ($rowSe["se"] == "1" and $rowSe["re"] == "1" and $rowSe["do"] == "1") {
         $status = "ขายหรือให้เช่าหรือขายดาวน์";
+        $price = number_format($rowSe["prt"]);
     }
 
     //$countNum = $rowSe["hit"] + 1;

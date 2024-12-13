@@ -12,10 +12,11 @@ $pb = $con->prepare("SELECT * FROM property WHERE pd = ?");
 $pb->execute([$_GET["pd"]]);
 $row = $pb->fetch(PDO::FETCH_ASSOC);
 
-$_SESSION["amp"] = $row["aid"];
+
+$pid =  $row["pid"];
 $_SESSION["amp"] = $row["aid"];
 $_SESSION["ampName"] = $row["an"];
-$_SESSION["province"] = $row["pid"];
+$_SESSION["province"] = $pid;
 $_SESSION["dis"] = $row["did"];
 $_SESSION["disName"] = $row["dn"];
 
@@ -49,7 +50,6 @@ if ($se == "1" and $re == "0" and $do == "0") {
 $cid = $row["cid2"];
 $ti =  $row["ti"];
 $d =  $row["d"];
-$pid =  $row["pid"];
 $pn = $row["pn"];
 $aid = $row["aid"];
 $an = $row["an"];
@@ -260,9 +260,9 @@ $id = $row["pd"];
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 province">
 
                         <?php
-                        if (!empty($r["pid"])) {
-                            echo '<option value="' . $r["pid"] . '">' . $r["pn"] . '</option>';
-                        }
+
+                        echo '<option value="' . $pid . '">' . $pn . '</option>';
+
 
 
                         ?>
@@ -311,8 +311,8 @@ $id = $row["pd"];
                         </svg>
                         <span class="sr-only">Info</span>
                         <div>
-                            <span class="font-medium">Danger alert!</span> Change a few things up and try submitting
-                            again.
+                            <span class="font-medium">เตือน!</span> เมื่อกดลบรูปภาพ รูปภาพจะลบทั้งหมด
+                            กรุณาใส่รูปภาพใหม่อีกครั้ง
                         </div>
                     </div>
                     <div class="text-end">
@@ -686,8 +686,8 @@ $(document).ready(function() {
     $(".showAmphur").load('searchAmphur.php');
 
     $('.province').mouseover(function() {
-        let povData = $(this).val();
-        let url = 'searchAmphur.php';
+        var povData = $(this).val();
+        var url = 'searchAmphur.php';
 
         $.post(url, {
             povData: povData
@@ -697,8 +697,9 @@ $(document).ready(function() {
     })
 
     $('.province').change(function() {
-        let povData = $(this).val();
-        let url = 'searchAmphur.php';
+        var povData = $(this).val();
+        var url = 'searchAmphur.php';
+
 
         $.post(url, {
             povData: povData
