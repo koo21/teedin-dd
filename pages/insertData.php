@@ -85,7 +85,7 @@ if ($_GET["g"] == "register") {
                  icon: "success",
                  timer:1500,
                }).then(function() {
-                 window.location.href = "login.php";
+                 window.location.href = "index.php";
              });
             });
      </script>';
@@ -100,7 +100,7 @@ if ($_GET["g"] == "register") {
                  icon: "warning",
                  timer:2500,
                }).then(function() {
-                 window.location.href = "register.php";
+                 window.location.href = "index.php";
              });
             });
      </script>';
@@ -112,6 +112,13 @@ if ($_GET["g"] == "register") {
 
 
 if ($_GET["g"] == "addProfile") {
+
+
+    $uid = $_POST["updateId"]; // uid
+
+    $pf = $con->prepare("SELECT * FROM users WHERE uid = ?");
+    $pf->execute([$uid]);
+    $rPf = $pf->fetch(PDO::FETCH_ASSOC);
 
     $fn = $_POST["fname"]; //fn
     $ln = $_POST["lname"]; //ln
@@ -125,23 +132,43 @@ if ($_GET["g"] == "addProfile") {
     } // pb
     $bo = $_POST["year"] . "-" . $_POST["month"] . "-" . $_POST["day"]; // bo
     $ge = $_POST["gentle"]; // ge
-    $pid = $_POST["province"]; // pid
-    $pv = $con->prepare(" SELECT * FROM province WHERE pid = ? "); //pid
-    $pv->execute([$pid]);
-    $rPv = $pv->fetch(PDO::FETCH_ASSOC);
-    $pn = $rPv["name"]; //pn
+
+    if ($_POST["province"] == "") {
+        $pid = $rPf["pid"];
+        $pn = $rPf["pn"];
+    } else {
+        $pid = $_POST["province"]; // pid
+        $pv = $con->prepare(" SELECT * FROM province WHERE pid = ? "); //pid
+        $pv->execute([$pid]);
+        $rPv = $pv->fetch(PDO::FETCH_ASSOC);
+        $pn = $rPv["name"];
+    }
+    //pn
     $amphurEx = explode("/", $_POST["amphur"]);
-    $aid = $amphurEx[1]; //aid
-    $ap = $con->prepare(" SELECT * FROM amphur WHERE aid = ? ");
-    $ap->execute([$aid]);
-    $rap = $ap->fetch(PDO::FETCH_ASSOC);
-    $an = $rap["name"]; //an
+    if ($amphurEx[1] == "") {
+        $aid = $rPf["aid"];
+        $an = $rPf["an"];
+    } else {
+        $aid = $amphurEx[1]; //aid
+        $ap = $con->prepare(" SELECT * FROM amphur WHERE aid = ? ");
+        $ap->execute([$aid]);
+        $rap = $ap->fetch(PDO::FETCH_ASSOC);
+        $an = $rap["name"]; //an  
+    }
+
+
     $districtEx = explode("/", $_POST["district"]);
-    $did = $districtEx[2]; //did
-    $di = $con->prepare(" SELECT * FROM district WHERE did = ? ");
-    $di->execute([$did]);
-    $rdi = $di->fetch(PDO::FETCH_ASSOC);
-    $dn = $rdi["name"]; //dn
+    if ($districtEx[2] == "") {
+        $did = $rPf["did"];
+        $dn = $rPf["dn"];
+    } else {
+        $did = $districtEx[2]; //did
+        $di = $con->prepare(" SELECT * FROM district WHERE did = ? ");
+        $di->execute([$did]);
+        $rdi = $di->fetch(PDO::FETCH_ASSOC);
+        $dn = $rdi["name"];
+    }
+
     $de = $_POST["detail"]; //de
     $ow = $_POST["owner"]; //ow
     $ag = $_POST["agent"]; //ag
@@ -160,6 +187,22 @@ if ($_GET["g"] == "addProfile") {
 
         $in = $con->prepare("UPDATE users SET ow = ?,ag= ?,ac = ?,bu = ?,iv= ?,de = ?,pid = ?,pn = ?,aid = ?,an = ?,did = ?,dn = ?,fn = ?,ln = ?,bo = ?,ge = ?,pb = ?,t1 = ?,t2 = ?,li = ?,tw = ?,ig = ?,fa = ? WHERE uid = ?");
         $in->execute([$ow, $ag, $ac, $bu, $iv, $de, $pid, $pn, $aid, $an, $did, $dn, $fn, $ln, $bo, $ge, $pb, $t1, $t2, $li, $tw, $ig, $fa, $uid]);
+
+        if (!empty($in)) {
+
+            echo '<script>
+            $(document).ready(function(){
+             Swal.fire({
+                 title: "แก้ไขข้อมูลสมาชิกสำเร็จ",
+                 text: "แก้ไขข้อมูลสมาชิกสำเร็จเรียบร้อยแล้ว!",
+                 icon: "success",
+                 timer:1500,
+               }).then(function() {
+                 window.location.href = "profile.php";
+             });
+            });
+     </script>';
+        }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
@@ -224,11 +267,11 @@ if ($_GET["g"] == "in") {
     $an = $rap["name"]; //an
 
     $districtEx = explode("/", $_POST["district"]);
-    echo "kkj->" . $did = $districtEx[2]; //did
+    $did = $districtEx[2]; //did
     $di = $con->prepare(" SELECT * FROM district WHERE did = ? ");
     $di->execute([$did]);
     $rdi = $di->fetch(PDO::FETCH_ASSOC);
-    echo "kkjdd->" . $dn = $rdi["name"]; //dn
+    $dn = $rdi["name"]; //dn
 
     $doc  = $_POST["doc"]; //doc
     $fl = $_POST["fl"]; //tl
@@ -300,7 +343,7 @@ if ($_GET["g"] == "ed") {
 
     $ch_row = $con->prepare("SELECT * FROM property ");
     $ch_row->execute();
-    $total_rows = $ch_row->rowCount() + 1;
+    $total_rows = $ch_row->rowCount();
 
     $pd = $_POST["idPd"];
 
@@ -498,10 +541,10 @@ if ($_GET["g"] == "dImg") {
             $(document).ready(function(){
              Swal.fire({
                  title: "ลบรูปภาพสำเร็จ",
-                 text: "ลบรูปภาพสำเร็จเรียบร้อยแล้ว! กรุณาใส่่รูปภาพใหม่อีกครั้ง",
+                 text: "ลบรูปภาพสำเร็จเรียบร้อยแล้ว! กรุณาใส่รูปภาพอีกครั้ง",
                  icon: "success",
                }).then(function() {
-                 window.location.href = "edit.php";
+                 window.location.href = "edit.php?pd=' . $_GET["pd"] . '";
              });
             });
      </script>';;

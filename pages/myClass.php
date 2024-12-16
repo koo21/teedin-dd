@@ -110,7 +110,11 @@ class MyClass
         $se = $con->prepare(" SELECT * FROM users WHERE uid = ? ");
         $se->execute([$n]);
         $r = $se->fetch(PDO::FETCH_ASSOC);
-        return $r["pb"];
+        if (!empty($r["pb"])) {
+            echo   '../th/img/' . $r["pb"] . '';
+        } else {
+            echo  '../th/img/user/noimage.jpg';
+        }
     }
 
     public function tel($n)

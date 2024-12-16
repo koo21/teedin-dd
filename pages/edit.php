@@ -339,8 +339,8 @@ $id = $row["pd"];
                         รูปภาพ</label>
                     <input
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 filePic"
-                        aria-describedby="file_input_help" id="file_input" type="file" name="file[]"
-                        accept="image/jpg,image/webp" multiple>
+                        aria-describedby="file_input_help" id="file_input" type="file" name="file[]" accept="image/jpg"
+                        multiple>
 
                     <p id="helper-text-explanation" class="mt-2 text-sm text-red-500 dark:text-gray-400">
                         ใส่รูปไม่เกิน 5 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น</p>
@@ -407,7 +407,12 @@ var editor = new FroalaEditor('#example', {
     ],
     colorsText: ['#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
         '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
-    ]
+    ],
+    events: {
+        'html.get': function(html) {
+            return html.replace(/id="isPasted"/g, '');
+        }
+    }
 
 
 });

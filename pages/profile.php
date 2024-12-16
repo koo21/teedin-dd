@@ -24,7 +24,7 @@ if (!empty($r["pb"])) {
     $imgUser = '../th/img/user/noimage.jpg';
 }
 
-$_SESSION["imgUser"] = $imgUser;
+
 
 ?>
 
@@ -311,39 +311,39 @@ $_SESSION["imgUser"] = $imgUser;
 </div>
 
 <script>
-imgInp.onchange = evt => {
-    const [file] = imgInp.files
-    if (file) {
-        blah.src = URL.createObjectURL(file)
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+            blah.src = URL.createObjectURL(file)
+        }
     }
-}
 
 
-$(document).ready(function() {
-    $(".showAmphur").load('searchAmphurProfile.php');
+    $(document).ready(function() {
+        $(".showAmphur").load('searchAmphurProfile.php');
 
-    $('.province').mouseover(function() {
-        let povData = $(this).val();
-        let url = 'searchAmphurProfile.php';
+        $('.province').mouseover(function() {
+            let povData = $(this).val();
+            let url = 'searchAmphurProfile.php';
 
-        $.post(url, {
-            povData: povData
-        }, function(data) {
-            $(".showAmphur").html(data);
-        });
+            $.post(url, {
+                povData: povData
+            }, function(data) {
+                $(".showAmphur").html(data);
+            });
+        })
+
+        $('.province').change(function() {
+            let povData = $(this).val();
+            let url = 'searchAmphurProfile.php';
+
+            $.post(url, {
+                povData: povData
+            }, function(data) {
+                $(".showAmphur").html(data);
+            });
+        })
     })
-
-    $('.province').change(function() {
-        let povData = $(this).val();
-        let url = 'searchAmphurProfile.php';
-
-        $.post(url, {
-            povData: povData
-        }, function(data) {
-            $(".showAmphur").html(data);
-        });
-    })
-})
 </script>
 
 
