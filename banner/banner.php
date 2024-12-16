@@ -8,7 +8,7 @@ if ($_SESSION["idUser"] == "") {
                             class="menuitem text-white bg-red-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-3 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">ลงประกาศฟรี</a>';
 }
 ?>
-<div class="relative">
+<div class="relative z-10">
     <div class="container-fluid fixed top-0  bg-gray-300">
         <div class="container  ">
             <div class="col-md-12 flex  justify-between justify-items-center items-center">
