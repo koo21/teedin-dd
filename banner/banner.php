@@ -8,32 +8,38 @@ if ($_SESSION["idUser"] == "") {
                             class="menuitem text-white bg-red-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-md px-3 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">ลงประกาศฟรี</a>';
 }
 ?>
+<div class="relative">
+    <div class="container-fluid fixed top-0  bg-gray-300">
+        <div class="container  ">
+            <div class="col-md-12 flex  justify-between justify-items-center items-center">
+                <div class="logo"><img src="../storage/images/logo.png" alt="Teedin DD" srcset=""></div>
 
-<div class="container-fluid bg-gray-300 ">
-    <div class="container">
-        <div class="col-md-12 flex justify-between justify-items-center items-center">
-            <div class="logo"><img src="../storage/images/logo.png" alt="Teedin DD" srcset=""></div>
-            <div class="menu">
-                <ul class="ulMenu">
-                    <li><a href="index.php" class="menuitem "><i class="bi bi-house-fill"></i> หน้าแรก</a></li>
+                <div class="menu ">
+                    <ul class="ulMenu ">
+                        <li><a href="index.php" class="menuitem "><i class="bi bi-house-fill"></i> หน้าแรก</a></li>
 
-                    <li><a href="" class="menuitem ">ลงโฆษณาที่ดิน</a></li>
-                    <li><a href="" class="menuitem ">ค้นหา</a></li>
-                    <li><a href="" class="menuitem ">ติดต่อเรา</a></li>
+                        <li><a href="" class="menuitem ">ลงโฆษณาที่ดิน</a></li>
+                        <li><a href="" class="menuitem ">ค้นหา</a></li>
+                        <li><a href="" class="menuitem ">ติดต่อเรา</a></li>
 
-                    <li><?= $register; ?></li>
-                    <li>
-                        <div class="cursor-pointer text-slate-500 hover:text-blue-600"
-                            data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
-                            เข้าสู่ระบบ</div>
-                    </li>
+                        <li><?= $register; ?></li>
+                        <li>
+                            <div class="cursor-pointer text-slate-500 hover:text-blue-600"
+                                data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
+                                เข้าสู่ระบบ</div>
+                        </li>
 
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
+
 </div>
+
+
+
 
 
 

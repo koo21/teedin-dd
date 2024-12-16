@@ -78,7 +78,7 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
 
 <body>
 
-    <div class="container mt-5 mx-10">
+    <div class="container mt-16 mx-10">
         <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6">
             <div class="px-2 md:col-span-2 xl:col-span-3 xl:col-start-2 ">
 
@@ -386,27 +386,26 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
                 }
 
             ?>
-            <div
-                class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
                 <a href="detail.php?id=<?= $row["pd"] ?>&p=<?= $part ?>">
-                    <img class="rounded-t-lg h-48 lg:h-64  w-full object-cover"
+                    <img class="rounded-t-lg h-32 lg:h-48     w-full object-cover"
                         src="../th/img/prop/<?= $part . $objShow->showImg($row["pd"])  ?>" alt="" />
 
-                    <div class="p-3 flex flex-col space-y-10">
-                        <div class="xl:h-48 lg:h-48  h-28 ">
+                    <div class="p-3 flex flex-col space-y-14">
+                        <div class="h-16  xl:h-52 lg:h-96 ">
                             <div class="mb-2">
 
 
                                 <div class="mb-2">
                                     <span
-                                        class="bg-green-100 text-green-800 text-sm font-light me-2 px-1.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                                        class="bg-green-100 text-green-800 text-xs md:text-sm font-light me-2 px-1.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
                                         <?= $status ?></span>
 
                                 </div>
 
                                 <h5
-                                    class=" text-lg font-normal tracking-tight text-gray-900 dark:text-white line-clamp-2 lg:line-clamp-3">
+                                    class="text-sm md:text-lg font-normal tracking-tight text-gray-900 dark:text-white line-clamp-2 lg:line-clamp-3">
                                     <?= $row["ti"] ?></h5>
                             </div>
 
@@ -476,7 +475,7 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-2 ">
+                        <div class="mt-12 mb-10 ">
 
                             <h2 class="text-xl lg:text-2xl tracking-tight text-amber-600 dark:text-white fontNumber">
                                 ฿ <?= $price ?> </h2>
@@ -498,7 +497,7 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
                                         </g>
                                     </g>
                                 </svg>
-                                <p class="mx-1 text-gray-400"><?= $row["pn"];  ?></p>
+                                <p class="mx-1 text-sm md:text-md text-gray-400"><?= $row["pn"];  ?></p>
                             </div>
                         </div>
                     </div>

@@ -41,6 +41,19 @@ body {
   color: aliceblue;
 }
 
+
+@media only screen and (max-width: 600px) {
+  .logo{
+    width: 130px;
+    height: auto;;
+  }
+  .menu {
+    display: none;
+  }
+  
+  
+}
+
 .bkImg {
   background-image: url("../storage/images/bk.jpg");
   background-position: center bottom;

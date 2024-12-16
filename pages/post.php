@@ -21,7 +21,7 @@ $row = $pb->fetch(PDO::FETCH_ASSOC);
 
 <div class="container">
 
-    <div class=" mt-3">
+    <div class="mt-16">
 
         <div class="text-end mb-3">
             <?php include 'funLoginProfile.php'; ?>

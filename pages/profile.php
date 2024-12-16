@@ -30,7 +30,7 @@ if (!empty($r["pb"])) {
 
 
 
-<div class="container mt-3">
+<div class="container mt-16">
     <div class="text-end mb-3"><?php include 'funLoginProfile.php'; ?></div>
 
     <div class="">
