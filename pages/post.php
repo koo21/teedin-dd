@@ -39,8 +39,7 @@ $row = $pb->fetch(PDO::FETCH_ASSOC);
 
                 <div class="text-xl font-medium text-blue-800 mb-5"><i class="bi bi-megaphone-fill"></i> ลงประกาศใหม่
                 </div>
-                <div class="text-xl font-base text-blue-500 mb-2">รายละเอียดที่ดิน (กรุณาลงประกาศเฉพาะ ที่ดิน
-                    เท่านั้น)</div>
+                <div class="text-xl font-base text-blue-500 mb-2">รายละเอียด</div>
                 <hr>
                 <div class="grid gap-6 mb-6 md:grid-cols-2 mt-2">
 
@@ -103,17 +102,37 @@ $row = $pb->fetch(PDO::FETCH_ASSOC);
                 <div class="mb-6">
                     <label for="detail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
                         รายละเอียดของประกาศ</label>
-                    <textarea id="example" rows="4" name="detail" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+                    <textarea id="summernote" rows="4" name="detail" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
                         selector">
 
                     </textarea>
                 </div>
-                <div class="mb-6">
-                    <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
-                        ขนาดที่ดิน(ตารางเมตร) <span class="text-red-500 font-normal">ไม่ต้องใส่ลูกน้ำ ( ,
-                            )</span></label>
-                    <input type="text" id="am" value="" name="am" onchange="JavaScript:chkNum1(this)"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                <div class="grid gap-6 mb-6 md:grid-cols-4">
+                    <div class="mb-6">
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            ไร่</label>
+                        <input type="number" id="" value="" name="ar"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
+                    <div class="mb-6">
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            งาน</label>
+                        <input type="number" id="" value="" name="ag"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
+                    <div class="mb-6">
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            วา</label>
+                        <input type="number" id="" value="" name="aw"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
+                    <div class="mb-6">
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            ขนาดที่ดิน(ตารางเมตร) <span class="text-red-500 font-normal">ไม่ต้องใส่ลูกน้ำ ( ,
+                                )</span></label>
+                        <input type="text" id="am" value="" name="am" onchange="JavaScript:chkNum1(this)"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
                 </div>
                 <div class="mb-6">
                     <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
@@ -150,13 +169,13 @@ $row = $pb->fetch(PDO::FETCH_ASSOC);
                 <div class="grid md:grid-cols-4 md:gap-6 mb-6">
                     <div class="">
                         <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชั้น</label>
-                        <input type="text" id="fl" value="" name="fl"
+                        <input type="number" id="fl" value="" name="fl"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                     <div class="">
                         <label for=""
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ห้องนอน</label>
-                        <input type="text" id="be" value="" name="be"
+                        <input type="number" id="be" value="" name="be"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
                     </div>
@@ -164,12 +183,13 @@ $row = $pb->fetch(PDO::FETCH_ASSOC);
                     <div class="">
                         <label for=""
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ห้องน้ำ</label>
-                        <input type="text" id="ba" value="" name="ba"
+                        <input type="number" id="ba" value="" name="ba"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                     <div class="">
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">โรงรถ</label>
-                        <input type="text" id="ca" value="" name="ca"
+                        <label for=""
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ที่จอดรถ(คัน)</label>
+                        <input type="number" id="ca" value="" name="ca"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
                     </div>
@@ -195,19 +215,43 @@ $row = $pb->fetch(PDO::FETCH_ASSOC);
 
 
 
-                <!-- <div class="">
-                    <?php
-                    $la = 13.81973;
-                    $lo = 100.08067;
+                <div class="mb-3 ">
+                    <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                        พิกัดที่ดิน</label>
+                    <div class="flex">
 
-                    ?>
+                        <a href="https://landsmaps.dol.go.th/" type="button" target="_blank"
+                            class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 flex">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+
+                            ค้นหาพิกัดที่ดิน
+                        </a>
+                        <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
+                            class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">วิธีทำพิกัดที่ดิน
+                        </button>
+                    </div>
+
+
+
+                    <!-- <?php
+                            $la = 13.81973;
+                            $lo = 100.08067;
+
+                            ?>
                     <iframe width="100%" height="400" frameborder="0" style="border:0"
                         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyByt7XDNDutI_B8i-0TWqLRa2OfoVDWkhI&q=<?php echo $la . ',' . $lo; ?>&maptype=satellite"
                         allowfullscreen>
-                    </iframe>
-                </div> -->
+                    </iframe> -->
+                </div>
 
-                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <!-- <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div class="">
                         <label for=""
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ละติจูด</label>
@@ -220,7 +264,7 @@ $row = $pb->fetch(PDO::FETCH_ASSOC);
                         <input type="text" id="lo" value="" name="lo"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
-                </div>
+                </div> -->
 
                 <div class="mb-6">
 
@@ -232,7 +276,7 @@ $row = $pb->fetch(PDO::FETCH_ASSOC);
                         multiple>
 
                     <p id="helper-text-explanation" class="mt-2 text-sm text-red-500 dark:text-gray-400">
-                        ใส่รูปไม่เกิน 5 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น</p>
+                        ใส่รูปไม่เกิน 7 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น</p>
                 </div>
 
                 <div class="p-4 text-md text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
@@ -258,12 +302,44 @@ $row = $pb->fetch(PDO::FETCH_ASSOC);
 
 
                     </div>
+
+                    <div class="mb-3">
+                        <div class="text-xl font-medium text-green-800 mb-2">ต้องการลงประกาศ</div>
+                        <div class="flex mb-3">
+                            <div class="flex items-center h-5">
+                                <input id="helper-radio1" aria-describedby="helper-radio-text" type="radio" value="1"
+                                    name="vip"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <div class="ms-2 text-sm">
+                                <label for="helper-radio"
+                                    class="font-medium text-gray-900 dark:text-gray-300">VIP</label>
+                                <p id="helper-radio-text" class="text-xs font-normal text-gray-500 dark:text-gray-300">
+                                    ประกาศของคุณจะอยู่หน้าแรกของเว็บไซต์(ต้องเสียค่าใช้จ่ายต่อเดือน)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="flex items-center h-5">
+                                <input id="helper-radio2" aria-describedby="helper-radio-text" type="radio" value="0"
+                                    name="vip"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <div class="ms-2 text-sm">
+                                <label for="helper-radio"
+                                    class="font-medium text-gray-900 dark:text-gray-300">ธรรมดา</label>
+                                <p id="helper-radio-text" class="text-xs font-normal text-gray-500 dark:text-gray-300">
+                                    ลงประกาศฟรี ไม่เสียค่าใช้จ่าย</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
                 </div>
 
-
-
                 <div class="mt-3">
-                    <input type="hidden" name="idPd" value="<?php echo $row["pd"] ?>">
                     <input type="hidden" name="idUser" value="<?php echo $_SESSION["idUser"]  ?>">
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 post">บันทึกข้อมูล</button>
@@ -275,39 +351,58 @@ $row = $pb->fetch(PDO::FETCH_ASSOC);
 
 </div>
 
+<!-- Main modal -->
+<div id="default-modal" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    ขั้นตอนการใช้งาน
+                </h3>
+                <button type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-4">
+
+                <p class="text-base leading-relaxed text-gray-800 dark:text-gray-400">
+                    1. เข้าไปที่เว็บไซต์ https://landsmaps.dol.go.th/<br>
+                    2. เลือกจังหวัด - อำเภอ - กรอกเลขที่โฉนดที่ดิน แล้วคลิกที่ปุ่ม "ค้นหาข้อมูล"<br>
+                    3.
+                    ระบบจะแสดงรายละเอียดแปลงที่ดินที่คนพบในหน้าต่างค้นหาและมาร์คที่ตั้งแปลงที่ดินบนแผนที่ด้วยแถบสีส้ม<br>
+                    4. การแสดงผลในมุมมอง Street View (ภาพเสมือนจริงของที่ดินแปลงนั้น ๆ) ให้คลิกเลือกเมนู “สตรีทวิว”
+                    ระบบจะแสดงภาพมุมมอง Street View ของที่ดินแปลงนั้น ๆ ในหน้าต่างค้นหา โดยสามารถขยายภาพ มุมมอง Street
+                    View ให้มีขนาดภาพที่กว้างจากเดิมได้โดยเลื่อนตัวชี้ Mouse
+                </p>
+
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php
 include '../components/layoutFooter.php';
 ?>
 
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@4.0.10/js/froala_editor.pkgd.min.js'>
-</script>
+
 
 <script>
-    var editor = new FroalaEditor('#example', {
-        //pluginsEnabled: ['align', 'fontSize'],
-        toolbarButtons: ['bold', 'italic', 'textColor', 'backgroundColor', 'fontSize', 'align'],
-        //pluginsEnabled: ['align', 'fontSize', 'textColor', 'backgroundColor'],
-        fontSizeSelection: true,
-        fontSize: ['8', '10', '12', '14', '18', '30', '60', '96'],
-        colorsBackground: [
-            '#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
-            '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
-        ],
-        colorsText: ['#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
-            '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
-        ],
-        events: {
-            'html.get': function(html) {
-                return html.replace(/id="isPasted"/g, '');
-            }
-        }
-
-
-    });
-
-
-
-
     function addCommas(nStr) {
         nStr += '';
         x = nStr.split('.');
@@ -344,12 +439,18 @@ include '../components/layoutFooter.php';
 
     $(document).ready(function() {
 
+        $('#summernote').summernote({
+            placeholder: 'ระบุรายละเอียด',
+            tabsize: 2,
+            height: 300
+        });
+
         $('.filePic').change(function() {
             var numFiles = $(this)[0].files.length;
-            if (numFiles > 5) {
+            if (numFiles > 7) {
                 Swal.fire({
                     title: "รูปภาพ",
-                    text: "กรุณาใส่รูปภาพไม่เกิน 5 รูป",
+                    text: "กรุณาใส่รูปภาพไม่เกิน 7 รูป",
                     icon: "warning"
                 });
                 $('.filePic').val("");

@@ -51,7 +51,7 @@ $obj = new MyClass();
                             แก้ไขประกาศ
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            แจ้งยกเลิก
+                            ลบประกาศ
                         </th>
                     </tr>
                 </thead>
@@ -109,7 +109,7 @@ $obj = new MyClass();
                             </td>
                             <td class="px-6 py-4 text-center">
                                 <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">แจ้งยกเลิก</a></a>
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">ลบประกาศ</a></a>
                             </td>
                         </tr>
                     <?php

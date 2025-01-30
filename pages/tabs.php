@@ -15,7 +15,7 @@ if ($_GET["b"] == "p3") {
     class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
     <li class="me-2">
         <a href="post.php?b=po"
-            class="inline-block p-4 <?= $bk2 ?>   p-4 text-gray-600 hover:bg-gray-50 rounded-t-lg  dark:bg-gray-800 dark:text-blue-500"><i
+            class="inline-block p-4 <?= $bk2 ?>   text-gray-600 hover:bg-gray-50 rounded-t-lg  dark:bg-gray-800 dark:text-blue-500"><i
                 class="bi bi-1-square"></i> ลงประกาศ</a>
     </li>
     <li class="me-2">
