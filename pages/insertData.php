@@ -282,6 +282,17 @@ if ($_GET["g"] == "in") {
     $lo = $_POST["lo"]; //lo
     $tel = $_POST["tel"]; //t1
     $li = $_POST["li"]; //li
+    $ar = $_POST["ar"];
+    $ag = $_POST["ag"];
+    $aw = $_POST["aw"];
+    $vip = $_POST["vip"];
+
+    if ($vip == 1) {
+        $dateStart = date("Y-m-d H:i:s");
+        $dateEnd = date("Y-m-d H:i:s", strtotime($dateStart . '+ 30 days'));
+    }
+
+
     $uid = $_POST["idUser"];
     $newDateTime = date("Y-m-d H:i:s");
 
@@ -315,8 +326,8 @@ if ($_GET["g"] == "in") {
     }
 
     try {
-        $in = $con->prepare("INSERT INTO property(uid,cid2, se, re, do, pid, pn, aid, an, did, dn, la, lo, doc, ti, d, fl, be, ba, ca, am, pt,prt,cr) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $in->execute([$uid, $cid, $se, $re, $do, $pid, $pn, $aid, $an, $did, $dn, $la, $lo, $doc, $ti, $d, $fl, $be, $ba, $ca, $am, $pt, $prt, $newDateTime]);
+        $in = $con->prepare("INSERT INTO property(uid,cid2, se, re, do, pid, pn, aid, an, did, dn, la, lo, doc, ti, d, fl, be, ba, ca, ar, ag, aw, am, pt,prt,cr,vip,vs,vt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $in->execute([$uid, $cid, $se, $re, $do, $pid, $pn, $aid, $an, $did, $dn, $la, $lo, $doc, $ti, $d, $fl, $be, $ba, $ca, $ar, $ag, $aw, $am, $pt, $prt, $newDateTime, $vip, $dateStart, $dateEnd]);
         if (!empty($in)) {
 
             echo '<script>
@@ -442,7 +453,17 @@ if ($_GET["g"] == "ed") {
     $lo = $_POST["lo"]; //lo
     $tel = $_POST["tel"]; //t1
     $li = $_POST["li"]; //li
+    $ar = $_POST["ar"];
+    $ag = $_POST["ag"];
+    $aw = $_POST["aw"];
     $uid = $_POST["idUser"];
+
+    $vip = $_POST["vip"];
+
+    if ($vip == 1) {
+        $dateStart = date("Y-m-d H:i:s");
+        $dateEnd = date("Y-m-d H:i:s", strtotime($dateStart . '+ 30 days'));
+    }
 
     $editDateTime = date("Y-m-d H:i:s");
 
@@ -497,8 +518,8 @@ if ($_GET["g"] == "ed") {
 
     try {
 
-        $ed = $con->prepare("UPDATE property SET cid2 = ?, se = ?,re = ?,do = ?,pid = ?,pn = ?,aid = ?,an = ?,did = ?,dn = ?,la = ?,lo = ?, doc = ?,ti = ?,d = ?,fl = ?,be = ?,ba  = ?,ca = ?,am = ?,pt = ?,prt = ?,mo = ? WHERE pd = ?");
-        $ed->execute([$cid, $se, $re, $do, $pid, $pn, $aid, $an, $did, $dn, $la, $lo, $doc, $ti, $d, $fl, $be, $ba, $ca, $am, $pt, $prt, $editDateTime, $pd]);
+        $ed = $con->prepare("UPDATE property SET cid2 = ?, se = ?,re = ?,do = ?,pid = ?,pn = ?,aid = ?,an = ?,did = ?,dn = ?,la = ?,lo = ?, doc = ?,ti = ?,d = ?,fl = ?,be = ?,ba  = ?,ca = ?,ar = ?, ag = ?, aw = ?,am = ?,pt = ?,prt = ?,mo = ?, vip = ?, vs = ? ,vt = ? WHERE pd = ?");
+        $ed->execute([$cid, $se, $re, $do, $pid, $pn, $aid, $an, $did, $dn, $la, $lo, $doc, $ti, $d, $fl, $be, $ba, $ca, $ar, $ag, $aw, $am, $pt, $prt, $editDateTime, $vip, $dateStart, $dateEnd, $pd]);
         if (!empty($ed)) {
             echo '<script>
                     $(document).ready(function(){

@@ -62,8 +62,12 @@ $fl = $row["fl"];
 $be = $row["be"];
 $ba = $row["ba"];
 $ca = $row["ca"];
+$ar = $row["ar"];
+$ag = $row["ag"];
+$aw = $row["aw"];
 $am = $row["am"];
 $id = $row["pd"];
+$vip = $row["vip"];
 
 ?>
 <link href='https://cdn.jsdelivr.net/npm/froala-editor@4.0.10/css/froala_editor.pkgd.min.css' rel='stylesheet'
@@ -96,8 +100,7 @@ $id = $row["pd"];
                 <div class="text-xl font-medium text-blue-800 mb-5"><i class="bi bi-megaphone-fill"></i>
                     แก้ไขประกาศของคุณ
                 </div>
-                <div class="text-xl font-base text-blue-500 mb-2">รายละเอียดที่ดิน (กรุณาลงประกาศเฉพาะ ที่ดิน
-                    เท่านั้น)</div>
+                <div class="text-xl font-base text-blue-500 mb-2">รายละเอียด</div>
                 <hr>
                 <div class="grid gap-6 mb-6 md:grid-cols-2 mt-2">
 
@@ -175,17 +178,38 @@ $id = $row["pd"];
                 <div class="mb-6">
                     <label for="detail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
                         รายละเอียดของประกาศ</label>
-                    <textarea id="example" rows="4" name="detail" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+                    <textarea id="summernote" rows="4" name="detail" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
                         selector">
                     <?php echo $d ?>
                     </textarea>
                 </div>
-                <div class="mb-6">
-                    <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
-                        ขนาดที่ดิน(ตารางเมตร) <span class="text-red-500 font-normal">ไม่ต้องใส่ลูกน้ำ ( ,
-                            )</span></label>
-                    <input type="text" id="am" value="<?php echo $am ?>" name="am" onchange="JavaScript:chkNum1(this)"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                <div class="grid gap-6 mb-6 md:grid-cols-4">
+                    <div class="mb-6">
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            ไร่</label>
+                        <input type="number" id="" value="<?= $ar ?>" name="ar"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
+                    <div class="mb-6">
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            งาน</label>
+                        <input type="number" id="" value="<?= $ag ?>" name="ag"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
+                    <div class="mb-6">
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            วา</label>
+                        <input type="number" id="" value="<?= $aw ?>" name="aw"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
+                    <div class="mb-6">
+                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
+                            ขนาดที่ดิน(ตารางเมตร) <span class="text-red-500 font-normal">ไม่ต้องใส่ลูกน้ำ ( ,
+                                )</span></label>
+                        <input type="text" id="am" value="<?php echo $am ?>" name="am"
+                            onchange="JavaScript:chkNum1(this)"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    </div>
                 </div>
                 <div class="mb-6">
                     <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">*
@@ -247,7 +271,8 @@ $id = $row["pd"];
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                     <div class="">
-                        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">โรงรถ</label>
+                        <label for=""
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ที่จอดรถ(คัน)</label>
                         <input type="text" id="ca" value="<?php echo $ca ?>" name="ca"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
@@ -286,7 +311,7 @@ $id = $row["pd"];
                     </iframe>
                 </div> -->
 
-                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <!-- <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div class="">
                         <label for=""
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ละติจูด</label>
@@ -299,7 +324,7 @@ $id = $row["pd"];
                         <input type="text" id="lo" value="<?php echo $lo ?>" name="lo"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
-                </div>
+                </div> -->
 
                 <div class="mb-6">
                     <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
@@ -343,7 +368,7 @@ $id = $row["pd"];
                         multiple>
 
                     <p id="helper-text-explanation" class="mt-2 text-sm text-red-500 dark:text-gray-400">
-                        ใส่รูปไม่เกิน 5 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น</p>
+                        ใส่รูปไม่เกิน 7 รูปภาพ หมายเหตุ รูปภาพที่ใส่ต้องเป็นนามสกุล jpg เท่านั้น</p>
                 </div>
 
                 <div class="p-4 text-md text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
@@ -369,6 +394,40 @@ $id = $row["pd"];
 
 
                     </div>
+
+                    <div class="mb-3">
+                        <div class="text-xl font-medium text-green-800 mb-2">ต้องการลงประกาศ</div>
+                        <div class="flex mb-3">
+                            <div class="flex items-center h-5">
+                                <input id="helper-radio1" aria-describedby="helper-radio-text" type="radio" value="1"
+                                    name="vip" <?php echo $vip == 1 ? 'checked' : "" ?>
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <div class="ms-2 text-sm">
+                                <label for="helper-radio"
+                                    class="font-medium text-gray-900 dark:text-gray-300">VIP</label>
+                                <p id="helper-radio-text" class="text-xs font-normal text-gray-500 dark:text-gray-300">
+                                    ประกาศของคุณจะอยู่หน้าแรกของเว็บไซต์(ต้องเสียค่าใช้จ่ายต่อเดือน)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="flex items-center h-5">
+                                <input id="helper-radio2" aria-describedby="helper-radio-text" type="radio" value="0"
+                                    name="vip" <?php echo $vip == 0 ? 'checked' : "" ?>
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            </div>
+                            <div class="ms-2 text-sm">
+                                <label for="helper-radio"
+                                    class="font-medium text-gray-900 dark:text-gray-300">ธรรมดา</label>
+                                <p id="helper-radio-text" class="text-xs font-normal text-gray-500 dark:text-gray-300">
+                                    ลงประกาศฟรี ไม่เสียค่าใช้จ่าย</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
                 </div>
 
 
@@ -390,36 +449,10 @@ $id = $row["pd"];
 include '../components/layoutFooter.php';
 ?>
 
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@4.0.10/js/froala_editor.pkgd.min.js'>
-</script>
+
 <script type="text/javascript" src="../slick/slick/slick.min.js"></script>
 
 <script>
-    var editor = new FroalaEditor('#example', {
-        //pluginsEnabled: ['align', 'fontSize'],
-        toolbarButtons: ['bold', 'italic', 'textColor', 'backgroundColor', 'fontSize', 'align'],
-        //pluginsEnabled: ['align', 'fontSize', 'textColor', 'backgroundColor'],
-        fontSizeSelection: true,
-        fontSize: ['8', '10', '12', '14', '18', '30', '60', '96'],
-        colorsBackground: [
-            '#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
-            '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
-        ],
-        colorsText: ['#15E67F', '#E3DE8C', '#D8A076', '#D83762', '#76B6D8', 'REMOVE',
-            '#1C7A90', '#249CB8', '#4ABED9', '#FBD75B', '#FBE571', '#FFFFFF'
-        ],
-        events: {
-            'html.get': function(html) {
-                return html.replace(/id="isPasted"/g, '');
-            }
-        }
-
-
-    });
-
-
-
-
     function addCommas(nStr) {
         nStr += '';
         x = nStr.split('.');
@@ -456,6 +489,13 @@ include '../components/layoutFooter.php';
 
     $(document).ready(function() {
 
+
+        $('#summernote').summernote({
+            placeholder: 'ระบุรายละเอียด',
+            tabsize: 2,
+            height: 300
+        });
+
         $('#deleteImage').click(function() {
             Swal.fire({
                 title: "ลบรูปภาพ ?",
@@ -481,10 +521,10 @@ include '../components/layoutFooter.php';
 
         $('.filePic').change(function() {
             var numFiles = $(this)[0].files.length;
-            if (numFiles > 5) {
+            if (numFiles > 7) {
                 Swal.fire({
                     title: "รูปภาพ",
-                    text: "กรุณาใส่รูปภาพไม่เกิน 5 รูป",
+                    text: "กรุณาใส่รูปภาพไม่เกิน 7 รูป",
                     icon: "warning"
 
                 });

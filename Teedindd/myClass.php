@@ -1,6 +1,6 @@
 <?php
 
-class MyClass
+class MyClassAdmin
 {
 
     public function province()
@@ -40,5 +40,23 @@ class MyClass
         while ($dist = $se->fetch(PDO::FETCH_ASSOC)) {
             echo '<option value="' . $povSearch . "/" . $ampSearch . "/" . $dist["did"] . '">' . $dist["name"] . '</option>';
         }
+    }
+
+    public function fname($n)
+    {
+        include '../config/connect.php';
+        $se = $con->prepare("SELECT * FROM users WHERE uid = ?");
+        $se->execute([$n]);
+        $r = $se->fetch(PDO::FETCH_ASSOC);
+        return $r["fn"] . " " . $r["ln"];
+    }
+
+    public function mail($n)
+    {
+        include '../config/connect.php';
+        $se = $con->prepare("SELECT * FROM users WHERE uid = ?");
+        $se->execute([$n]);
+        $r = $se->fetch(PDO::FETCH_ASSOC);
+        return $r["em"];
     }
 }
