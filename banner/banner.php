@@ -15,12 +15,14 @@ if ($_SESSION["idUser"] == "") {
                 <div class="logo"><img src="../storage/images/logo.png" alt="Teedin DD" srcset=""></div>
 
                 <div class="menu ">
-                    <ul class="ulMenu ">
-                        <li><a href="index.php" class="menuitem "><i class="bi bi-house-fill"></i> หน้าแรก</a></li>
+                    <ul class="ulMenu">
+                        <li><a href="index.php" class=""><i class="bi bi-house-fill"></i> หน้าแรก</a></li>
 
-                        <li><a href="" class="menuitem ">ลงโฆษณาที่ดิน</a></li>
-                        <li><a href="" class="menuitem ">ค้นหา</a></li>
-                        <li><a href="" class="menuitem ">ติดต่อเรา</a></li>
+                        <li><a href="" class="">ลงโฆษณาที่ดิน</a>
+                        </li>
+                        <li><a href="" class="">ค้นหา</a></li>
+                        <li><a href="" class="">ติดต่อเรา</a>
+                        </li>
 
                         <li><?= $register; ?></li>
                         <li>
@@ -31,43 +33,6 @@ if ($_SESSION["idUser"] == "") {
 
                     </ul>
                 </div>
-                <div class="icon cursor-pointer">
-                    <svg class="w-10 h-10 text-gray-800 dark:text-white" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="M5 7h14M5 12h14M5 17h14" />
-                    </svg>
-
-                </div>
-
-                <div class="iconClose cursor-pointer" style="display: none;">
-                    <svg class="w-10 h-10 text-gray-800 dark:text-white" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18 17.94 6M18 18 6.06 6" />
-                    </svg>
-
-
-                </div>
-
-            </div>
-
-            <div class="menuSub py-3 mb-3" style="display: none;">
-                <ul class="ulMenu ">
-                    <li><a href="index.php" class="menuitem "><i class="bi bi-house-fill"></i> หน้าแรก</a></li>
-
-                    <li><a href="" class="menuitem ">ลงโฆษณาที่ดิน</a></li>
-                    <li><a href="" class="menuitem ">ค้นหา</a></li>
-                    <li><a href="" class="menuitem ">ติดต่อเรา</a></li>
-
-                    <li><?= $register; ?></li>
-                    <li class="me-3">
-                        <div class="cursor-pointer text-slate-500 hover:text-blue-600"
-                            data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
-                            เข้าสู่ระบบ</div>
-                    </li>
-
-                </ul>
             </div>
 
         </div>
@@ -145,19 +110,12 @@ $(document).ready(function() {
         $(".registerForm").css('border-bottom', '6px solid #2d8902');
         $(".showLoginFormAndRegisterForm").load('formRegister.php');
     })
+    //$('.ulMenu .menuitem').click(function(e) {
 
-    $('.icon').click(function() {
-        $('.iconClose').css('display', 'block');
-        $('.menuSub').css('display', 'block');
-        $('.icon').css('display', 'none');
+    //    $('.active').removeClass('active');
+    //    $(this).addClass('active');
 
-    })
-    $('.iconClose').click(function() {
-        $('.icon').css('display', 'block');
-        $('.menuSub').css('display', 'none');
-        $('.iconClose').css('display', 'none');
-
-    })
+    //})
 })
 
 

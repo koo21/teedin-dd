@@ -41,6 +41,8 @@ body {
   color: aliceblue;
 }
 
+
+
 .icon{
   display: none;
 }
@@ -57,46 +59,9 @@ body {
   .menu {
     display: none;
   }
-  .icon{
-    display: block;
-    width: auto;
-    height: auto;
-    text-align: end;
-  }
-
-  .menuSub {
-    display: block;
-    width: 100%;
-    height: auto;
-    text-align: end;
-    background-color: white;
-  
-  }
-  .menuSub ul {
-    list-style: none;
-  }
-  .menuSub ul li {
-    display:block;
-    width: auto;
-    height: auto;
-  }
-  .menuSub ul li a {
-    display:block;
-    width: auto;
-    height: auto;
-    padding: 0.2rem 0.5rem;
-  }
-  
-  .menuSub .ulMenu .active {
-    background-color: #2d8902;
-    color: aliceblue;
-  }
   
   
 }
-
-
-
 
 .bkImg {
   background-image: url("../storage/images/bk.jpg");
