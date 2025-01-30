@@ -218,7 +218,7 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
                         </svg> <?= $rowSe["pn"] ?> - <?= $rowSe["an"] ?> - <?= $rowSe["dn"] ?>
                     </div>
 
-                    <div class="fontNumber me-2 "><i class="bi bi-people-fill"></i> ผู้เข้าชม <?= 0 ?> ครั้ง
+                    <div class="fontNumber me-2 "><i class="bi bi-people-fill"></i> ผู้เข้าชม <?= $countNum ?> ครั้ง
                     </div>
                 </div>
                 <div class="mt-2 mb-2 flex justify-between items-center ">
@@ -634,6 +634,7 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
 
         // load more content
     });
+<<<<<<< Updated upstream
     var pageLink = 'http://madu-web.com/pages/detail.php?id=<?= $_GET["id"] ?>&p=<?= $_GET["p"] ?>';
 
     function fbs_click() {
@@ -647,6 +648,8 @@ $img2 = 'https://madu-web.com/th/img/prop/' . $_GET["p"] . $rImg["a"] . '';
             'toolbar=0,status=0,width=626,height=436');
         return false;
     }
+=======
+>>>>>>> Stashed changes
     </script>
 
 </body>
