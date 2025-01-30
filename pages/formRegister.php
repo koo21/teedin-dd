@@ -35,7 +35,7 @@ include '../config/connect.php';
                 <input type="password" id="registerPassword" name="registerPassword"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 <button type="button" id="eye"
-                    class="absolute right-2 bg-transparent  flex items-center justify-center text-gray-700">
+                    class="absolute -right-2 w-5 h-5 bg-transparent  flex items-center justify-center text-gray-700">
                     <i class="bi bi-eye-fill show"></i>
                     <i class="bi bi-eye-slash-fill hide"></i>
                 </button>
@@ -48,7 +48,7 @@ include '../config/connect.php';
                 <input type="password" id="CRegisterPassword" name="CRegisterPassword"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 <button type="button" id="CheckEye"
-                    class="absolute right-2 bg-transparent  flex items-center justify-center text-gray-700">
+                    class="absolute -right-2 w-5 h-5 bg-transparent  flex items-center justify-center text-gray-700">
                     <i class="bi bi-eye-fill show"></i>
                     <i class="bi bi-eye-slash-fill hide"></i>
                 </button>
